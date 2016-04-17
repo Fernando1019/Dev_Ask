@@ -25,7 +25,7 @@ public class EntradaActivity extends  AppCompatActivity {
 
         new Handler().postDelayed(new Runnable(){
             public void run(){
-                // Cuando pasen los 3 segundos, pasamos a la actividad principal de la aplicación
+                // Cuando pasen los 5 segundos, pasamos a la actividad principal de la aplicación
                 Intent intent = new Intent(EntradaActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
