@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dev Ask "
+        android:text="DevAsk "
         android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
     </android.support.v7.widget.Toolbar>
 
