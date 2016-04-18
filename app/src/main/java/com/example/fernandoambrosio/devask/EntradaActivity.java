@@ -13,7 +13,7 @@ import android.view.WindowManager;
 public class EntradaActivity extends  AppCompatActivity {
 
     // Duración en milisegundos que se mostrará el splash
-    private final int DURACION_SPLASH = 6000; // 3 segundos
+    private final int DURACION_SPLASH = 5000; // 5 segundos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
