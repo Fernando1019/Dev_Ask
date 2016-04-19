@@ -40,6 +40,57 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal">
 
+        <Button
+            android:layout_width="104dp"
+            android:layout_height="86dp"
+            android:id="@+id/buttonAyuda"
+            android:layout_gravity="left|bottom"
+            android:background="@mipmap/ic_action_help"
+            android:text="Ayuda"
+            android:textColor="#000000"
+            android:gravity="bottom|center_horizontal" />
+
+        <Button
+            android:layout_width="104dp"
+            android:layout_height="86dp"
+            android:id="@+id/buttonPuntos"
+            android:layout_gravity="right|bottom"
+            android:background="@mipmap/ic_editor_insert_chart"
+            android:text="Ranking"
+            android:textColor="#000000"
+            android:gravity="bottom|center_horizontal" />
+
+        <Button
+            android:layout_width="104dp"
+            android:layout_height="86dp"
+            android:id="@+id/buttonJugar"
+            android:layout_gravity="center"
+            android:background="@mipmap/ic_av_play_circle_fill"
+            android:text="Jugar"
+            android:textColor="#000000"
+            android:gravity="bottom|center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Bienvenido "
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal|top"
+            android:textColor="#000000"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="40dp" />
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/emptyString"
+            android:id="@+id/usuario"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="30dp"
+            android:textColor="#000000"
+            android:layout_marginTop="40dp" />
     </FrameLayout>
 
     //fin de cabecera

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DevAsk</string>
+    <string name="emptyString" />
 </resources>
