@@ -1,6 +1,7 @@
 package com.example.fernandoambrosio.devask;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -17,8 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
 
 
-    private static final String TABLA_USUARIO = "create table usaurio (id integer primary key not null auto increment , " +
-    "nombre text not null);";
+    private static final String TABLA_USUARIO = "CREATE TABLE `usuario` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `nombre` TEXT NOT NULL);";
 
     public DatabaseHelper(Context contex ){
         super(contex, DATABASE_NAME, null, DATABASE_VERSION);
@@ -45,5 +45,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "DROP TABLE IF EXIST " + TABLE_NAME;
         db.execSQL(query);
         this.onCreate(db);
+    }
+
+    public  String setNombre() {
+        String query ="SELECT nombre FROM usuario ORDER BY `id` DESC LIMIT 1";
+        Cursor cursor =db.rawQuery(query,null);
+        String nombre="";
+        if (cursor.moveToFirst()){
+            do{
+                nombre= cursor.getString(0);
+            }
+            while(cursor.moveToNext());
+        }
+        return  nombre;
+
     }
 }
