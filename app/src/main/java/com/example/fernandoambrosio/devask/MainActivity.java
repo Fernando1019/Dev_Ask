@@ -10,9 +10,10 @@ import android.widget.EditText;
 
 
 public class MainActivity extends AppCompatActivity {
-    DatabaseHelper base;
+    private AccesoUsuario acceso;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        acceso = new AccesoUsuario(this);
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.registro);
@@ -46,14 +47,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("nombre", str);
                     startActivity(intent);
                     finish();
-
-                  //  Usuario u = new Usuario();
-                   // u.setNombre(str);
-                    //base.insertarUsuario(u);
-                    //Intent intent = new Intent(MainActivity.this, Menu.class);
-                    //intent.putExtra("nombre", str);
-                    //startActivity(intent);
-                    //finish();
+                    Usuario u = new Usuario();
+                    u.setNombre(str);
+                    acceso.insert(u);
                 }
             }
         });
