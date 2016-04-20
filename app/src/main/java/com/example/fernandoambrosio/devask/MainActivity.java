@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.registro);
-        base = new DatabaseHelper(this);
+        DatabaseHelper  helper = new DatabaseHelper(this);
+
         // Botón de salida (final de la aplicación)
         Button boton_salida = (Button)findViewById(R.id.buttonCancelar);
         boton_salida.setOnClickListener(new View.OnClickListener() {
@@ -40,13 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
                     EditText a = (EditText)findViewById(R.id.tUsuario);
                     String str = a.getText().toString();
-                    Usuario u = new Usuario();
-                    u.setNombre(str);
-                    base.insertarUsuario(u);
-                    Intent intent = new Intent(MainActivity.this, Menu.class);
+
+                   Intent intent = new Intent(MainActivity.this, Menu.class);
                     intent.putExtra("nombre", str);
                     startActivity(intent);
                     finish();
+
+                  //  Usuario u = new Usuario();
+                   // u.setNombre(str);
+                    //base.insertarUsuario(u);
+                    //Intent intent = new Intent(MainActivity.this, Menu.class);
+                    //intent.putExtra("nombre", str);
+                    //startActivity(intent);
+                    //finish();
                 }
             }
         });
