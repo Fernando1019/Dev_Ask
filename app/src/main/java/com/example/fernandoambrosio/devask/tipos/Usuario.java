@@ -1,4 +1,4 @@
-package com.example.fernandoambrosio.devask;
+package com.example.fernandoambrosio.devask.tipos;
 
 /**
  * Created by Fernando Ambrosio on 18/04/2016.

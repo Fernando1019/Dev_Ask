@@ -1,9 +1,11 @@
-package com.example.fernandoambrosio.devask;
+package com.example.fernandoambrosio.devask.baseDeDatos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.fernandoambrosio.devask.tipos.Usuario;
 
 /**
  * Created by josueChaqui on 20/04/2016.
@@ -30,17 +32,19 @@ public class AccesoUsuario {
     }
     public String getUsuario(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta = "SELECT´"+Usuario.COLUMNA_NOMBRE +" FROM "+Usuario.TABLE_NAME+"WHERE "+Usuario.COLUMNA_ID+"= ?";
+        String consulta = "SELECT "+Usuario.COLUMNA_NOMBRE +" FROM "+Usuario.TABLE_NAME+" WHERE "+Usuario.COLUMNA_ID+"= 1";
+        System.out.println(consulta);
         Usuario usuario = new Usuario();
-        int iCount=1;
-        Cursor cursor = db.rawQuery(consulta, new String[]{String.valueOf(1)});
-        if(cursor.moveToFirst()){
-            do{
-                usuario.setNombre(cursor.getString(cursor.getColumnIndex(Usuario.TABLE_NAME)));
-            }while (cursor.moveToNext());
-
+        Cursor cursor = db.rawQuery(consulta, null);
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                usuario.setNombre(cursor.getString(cursor.getColumnIndex("nombre")));
+                cursor.close();
+            } while (cursor.moveToNext());
         }
-        cursor.close();
+        else {
+            System.out.println("a");
+        }
         db.close();
         return usuario.getNombre();
     }
