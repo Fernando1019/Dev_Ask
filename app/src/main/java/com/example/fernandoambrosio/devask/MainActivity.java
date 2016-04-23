@@ -8,6 +8,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
+import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
+import com.example.fernandoambrosio.devask.tipos.Usuario;
+
 
 public class MainActivity extends AppCompatActivity {
     private AccesoUsuario acceso;
@@ -17,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.registro);
-        DatabaseHelper  helper = new DatabaseHelper(this);
 
         // Botón de salida (final de la aplicación)
         Button boton_salida = (Button)findViewById(R.id.buttonCancelar);
