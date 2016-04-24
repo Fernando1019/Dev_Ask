@@ -15,105 +15,55 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DevAsk "
+            android:text="SELECCION"
             android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fffff"
-        android:weightSum="1">
+        android:layout_height="147dp"
+        android:layout_gravity="center_horizontal">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
-                android:text="aaa"
-                android:id="@+id/textView3"
-                android:layout_weight="0.25"
-                android:textColor="@color/abc_color_highlight_material"
-                android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="New Text"
-                android:id="@+id/preguntaSeleccion" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="63dp"></LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="129dp"
-                android:layout_height="match_parent"></LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="135dp"
-                android:layout_height="match_parent"
-                android:weightSum="1">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:id="@+id/button" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="31dp"></LinearLayout>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:id="@+id/button2" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="26dp"
-                    android:layout_weight="0.08"></LinearLayout>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:id="@+id/button3" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></LinearLayout>
-
-        </LinearLayout>
-
+            android:text="Pregunta?"
+            android:id="@+id/textView3"
+            android:textColor="#000000"
+            android:textSize="35dp" />
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="50dp"
+            android:background="#275f78" />
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:text="New Button"
+            android:id="@+id/button2"
+            android:layout_gravity="center"
+            android:background="#275f78" />
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:text="New Button"
+            android:id="@+id/button3"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="50dp"
+            android:background="#275f78" />
+    </FrameLayout>
+
 
 </LinearLayout>

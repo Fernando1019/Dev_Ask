@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    //Cabecera
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DevAsk "
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:text="Falsa o Verdadera"
+            android:id="@+id/buttonFv"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="150dp"
+            android:background="#275f78"
+            android:textSize="20dp"
+            android:nestedScrollingEnabled="false" />
+
+        <Button
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:text="Pregunta Directa"
+            android:id="@+id/buttonPre"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="#275f78"
+            android:textSize="20dp" />
+
+        <Button
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:text="Opcion Multiple"
+            android:id="@+id/buttonOpcion"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="150dp"
+            android:background="#275f78"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIPO DE PREGUNTA"
+            android:id="@+id/textView5"
+            android:layout_gravity="left|top"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="88dp"
+            android:text="Jugar"
+            android:id="@+id/button4"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@mipmap/ic_av_play_circle_fill"
+            android:gravity="bottom|center_horizontal"
+            android:textColor="#000000"
+            android:layout_marginBottom="35dp"
+            android:onClick="generar" />
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -28,6 +28,34 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".RandomActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".PreguntaFv"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".PreguntaDirecta"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".PreguntaSeleccion"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".RankingActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+
+
     </application>
 
 </manifest>

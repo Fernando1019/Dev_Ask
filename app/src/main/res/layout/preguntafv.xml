@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:weightSum="1">
+    android:background="#ffffff">
     //Cabecera
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
@@ -15,46 +14,44 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DIRECTA"
-            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+            android:text="FALSA O VERDADERA"
+            android:textSize="32dp" />
     </android.support.v7.widget.Toolbar>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="163dp"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PREGUNTA"
-            android:id="@+id/textView6"
-            android:textColor="#000000"
-            android:textSize="35dp" />
-    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal">
 
-        <EditText
-            android:layout_width="265dp"
-            android:layout_height="57dp"
-            android:id="@+id/editText"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PREGUNTA #"
+            android:id="@+id/textView5"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="40dp" />
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:layout_marginTop="50dp" />
 
         <Button
-            android:layout_width="199dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="ACEPTAR"
-            android:id="@+id/button5"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:textSize="25dp"
-            android:background="#275f78" />
+            android:text="verdadero"
+            android:id="@+id/buttonFv"
+            android:layout_gravity="left|center_vertical"
+            android:background="#275f78"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Falso"
+            android:id="@+id/buttonPre"
+            android:layout_gravity="right|center_vertical"
+            android:background="#275f78"
+            android:textSize="20dp"
+            android:layout_marginRight="15dp" />
     </FrameLayout>
 
 

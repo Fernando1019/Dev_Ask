@@ -13,8 +13,10 @@ import com.example.fernandoambrosio.devask.tipos.Usuario;
 public class AccesoUsuario {
     private DatabaseHelper dbHelper;
     public AccesoUsuario(Context contexto){
+
         dbHelper = new DatabaseHelper(contexto);
     }
+
     public int insert(Usuario usuario){
         delete(1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
