@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
                    Intent intent = new Intent(MainActivity.this, Menu.class);
                     intent.putExtra("nombre", str);
-                    startActivity(intent);
                     finish();
                     Usuario u = new Usuario();
                     u.setNombre(str);
                     acceso.insert(u);
+                    startActivity(intent);
                 }
             }
         });
