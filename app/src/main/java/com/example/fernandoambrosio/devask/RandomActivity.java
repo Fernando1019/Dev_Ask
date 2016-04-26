@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.fernandoambrosio.devask.tipos.Pregunta;
+import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
+
 import java.util.Random;
 
 /**
@@ -25,7 +28,8 @@ public class RandomActivity extends AppCompatActivity {
 
    }
 
-    public void generar(View view) {
+    public  void generar() {
+        Juego juego = new Juego();
         Random random = new Random();
         int numero = random.nextInt(3) + 1;
         //TextView textView = (TextView)findViewById(R.id.textView5);
@@ -34,16 +38,19 @@ public class RandomActivity extends AppCompatActivity {
 
 
         if (numero == 1) {
+            PreguntaFv vf = juego.crearPreguntaVf();
             Intent intent = new Intent(RandomActivity.this, PreguntaFv.class);
             startActivity(intent);
             finish();
         }
         if (numero == 2) {
+            PreguntaDirecta directa = juego.crearPreguntaDirecta();
             Intent intent = new Intent(RandomActivity.this, PreguntaDirecta.class);
             startActivity(intent);
             finish();
         }
         if (numero == 3) {
+            PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
             Intent intent = new Intent(RandomActivity.this, PreguntaSeleccion.class);
             startActivity(intent);
             finish();
