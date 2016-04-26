@@ -9,12 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
-import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
+
 import com.example.fernandoambrosio.devask.tipos.Usuario;
 
 
 public class MainActivity extends AppCompatActivity {
     private AccesoUsuario acceso;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         acceso = new AccesoUsuario(this);
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-      Button boton_ingresar = (Button)findViewById(R.id.buttonAceptar);
+        Button boton_ingresar = (Button)findViewById(R.id.buttonAceptar);
         boton_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     EditText a = (EditText)findViewById(R.id.tUsuario);
                     String str = a.getText().toString();
 
-                   Intent intent = new Intent(MainActivity.this, Menu.class);
+                    Intent intent = new Intent(MainActivity.this, Menu.class);
                     intent.putExtra("nombre", str);
                     finish();
                     Usuario u = new Usuario();
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
 
