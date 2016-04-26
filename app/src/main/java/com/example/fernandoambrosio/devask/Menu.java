@@ -11,7 +11,12 @@ import android.widget.TextView;
 
 import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
 import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
+import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
+import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
+import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 import com.example.fernandoambrosio.devask.tipos.Usuario;
+
+import java.util.Random;
 
 /**
  * Created by Fernando Ambrosio on 19/04/2016.
@@ -54,12 +59,44 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.buttonJugar) {
-                    Intent intent = new Intent(Menu.this, RandomActivity.class);
-                    startActivity(intent);
-                    finish();
+                   jugar();
                 }
             }
 
         });
+    }
+    public  void jugar() {
+        Juego juego = new Juego(this);
+        Random random = new Random();
+        int numero = random.nextInt(3) + 1;
+
+        if (numero == 1) {
+            PreguntaVF vf = juego.crearPreguntaVf();
+            Intent intent = new Intent(Menu.this, PreguntaFv.class);
+            intent.putExtra("pregunta",vf.getContexto());
+            intent.putExtra("respuesta",vf.getRespuesta());
+            startActivity(intent);
+            finish();
+        }
+        if (numero == 2) {
+            PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
+            Intent intent = new Intent(Menu.this, PreguntaDirecta.class);
+            intent.putExtra("pregunta",directa.getContexto());
+            intent.putExtra("pregunta",directa.getRespuesta());
+            startActivity(intent);
+            finish();
+        }
+        if (numero == 3) {
+            PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
+            Intent intent = new Intent(Menu.this, PreguntaSeleccion.class);
+            String[] respuestas = multiple.getRespuesta();
+            intent.putExtra("pregunta",multiple.getContexto());
+            intent.putExtra("respuesta1",respuestas[0]);
+            intent.putExtra("respuesta2",respuestas[1]);
+            intent.putExtra("respuesta3",respuestas[2]);
+            intent.putExtra("correcta",multiple.getCorrecta());
+            startActivity(intent);
+            finish();
+        }
     }
 }

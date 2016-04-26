@@ -22,40 +22,51 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="163dp"
+        android:layout_height="123dp"
         android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PREGUNTA"
-            android:id="@+id/textView6"
-            android:textColor="#000000"
-            android:textSize="35dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="308dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PREGUNTA"
+                android:id="@+id/TxtViewPregDirecta"
+                android:textColor="#000000"
+                android:textSize="28dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"></LinearLayout>
+
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+    <EditText
+        android:layout_width="265dp"
+        android:layout_height="57dp"
+        android:id="@+id/eTxtRespuesta"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="40dp" />
 
-        <EditText
-            android:layout_width="265dp"
-            android:layout_height="57dp"
-            android:id="@+id/editText"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="40dp" />
-
-        <Button
-            android:layout_width="199dp"
-            android:layout_height="wrap_content"
-            android:text="ACEPTAR"
-            android:id="@+id/button5"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:textSize="25dp"
-            android:background="#275f78" />
-    </FrameLayout>
+    <Button
+        android:layout_width="199dp"
+        android:layout_height="wrap_content"
+        android:text="ACEPTAR"
+        android:id="@+id/btAceptarDirecta"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:textSize="25dp"
+        android:background="#275f78" />
 
 
 </LinearLayout>
