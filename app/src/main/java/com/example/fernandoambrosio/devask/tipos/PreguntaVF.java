@@ -9,4 +9,8 @@ public class PreguntaVF extends Pregunta {
     public Boolean getRespuesta() {
         return respuesta;
     }
+
+    public void setRespuesta(Boolean respuesta) {
+        this.respuesta = respuesta;
+    }
 }

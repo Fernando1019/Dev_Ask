@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 
 import com.example.fernandoambrosio.devask.tipos.Pregunta;
+import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
+import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
 import java.util.Random;
 
@@ -38,20 +40,30 @@ public class RandomActivity extends AppCompatActivity {
 
 
         if (numero == 1) {
-            PreguntaFv vf = juego.crearPreguntaVf();
+            PreguntaVF vf = juego.crearPreguntaVf();
             Intent intent = new Intent(RandomActivity.this, PreguntaFv.class);
+            intent.putExtra("pregunta",vf.getContexto());
+            intent.putExtra("respuesta",vf.getRespuesta());
             startActivity(intent);
             finish();
         }
         if (numero == 2) {
-            PreguntaDirecta directa = juego.crearPreguntaDirecta();
+            PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
             Intent intent = new Intent(RandomActivity.this, PreguntaDirecta.class);
+            intent.putExtra("pregunta",directa.getContexto());
+            intent.putExtra("pregunta",directa.getRespuesta());
             startActivity(intent);
             finish();
         }
         if (numero == 3) {
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
             Intent intent = new Intent(RandomActivity.this, PreguntaSeleccion.class);
+            String[] respuestas = multiple.getRespuesta();
+            intent.putExtra("pregunta",multiple.getContexto());
+            intent.putExtra("respuesta1",respuestas[0]);
+            intent.putExtra("respuesta2",respuestas[1]);
+            intent.putExtra("respuesta3",respuestas[2]);
+            intent.putExtra("correcta",multiple.getCorrecta());
             startActivity(intent);
             finish();
         }

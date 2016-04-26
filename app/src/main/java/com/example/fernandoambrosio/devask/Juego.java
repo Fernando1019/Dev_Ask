@@ -1,16 +1,18 @@
 package com.example.fernandoambrosio.devask;
 
+import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
+import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
 /**
  * Created by josueChaqui on 25/04/2016.
  */
 public class Juego {
-    public PreguntaFv crearPreguntaVf(){
+    public PreguntaVF crearPreguntaVf(){
 
         return null;
     }
-    public PreguntaDirecta crearPreguntaDirecta(){
+    public PreguntaDirectaTipo crearPreguntaDirecta(){
         return null;
     }
     public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(){
