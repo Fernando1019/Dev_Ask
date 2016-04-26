@@ -30,8 +30,8 @@ public class RandomActivity extends AppCompatActivity {
 
    }
 
-    public  void generar() {
-        Juego juego = new Juego();
+    public  void jugar() {
+        Juego juego = new Juego(this);
         Random random = new Random();
         int numero = random.nextInt(3) + 1;
         //TextView textView = (TextView)findViewById(R.id.textView5);
