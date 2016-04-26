@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
+import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
 
 /**
@@ -50,22 +51,22 @@ public class AccesoJuego {
         db.close();
         return ids;
     }
-    public PreguntaDirectaTipo getPregutaVF(int id){
+    public PreguntaVF getPregutaVF(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="SELECT contexto,  respuesta  FROM Pregunta INNER JOIN(SELECT " +
                 "Pregunta_idPregunta, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
                 ") AS directa ON directa.Pregunta_idPregunta = directa.Pregunta_idPregunta;";
         Cursor cursor = db.rawQuery(consulta,null);
-        PreguntaDirectaTipo preguntaDirectaTipo = new PreguntaDirectaTipo();
+        PreguntaVF preguntavf = new PreguntaVF();
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
-                preguntaDirectaTipo.setRespuesta(cursor.getString(cursor.getColumnIndex("Respuesta")));
-                preguntaDirectaTipo.setContexto(cursor.getString(cursor.getColumnIndex("contexto")));
+                preguntavf.setRespuesta(Boolean.valueOf(cursor.getString(cursor.getColumnIndex("Respuesta"))));
+                preguntavf.setContexto(cursor.getString(cursor.getColumnIndex("contexto")));
                 cursor.close();
             } while (cursor.moveToNext());
         }
         db.close();
-        return preguntaDirectaTipo;
+        return preguntavf;
     }
 
 }
