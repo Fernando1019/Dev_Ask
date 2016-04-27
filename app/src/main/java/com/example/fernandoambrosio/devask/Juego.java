@@ -8,6 +8,7 @@ import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
 import java.util.Random;
+import java.util.StringTokenizer;
 
 /**
  * Created by josueChaqui on 25/04/2016.
@@ -37,18 +38,24 @@ public class Juego {
         PreguntaDirectaTipo pregunta =acceso.getPreguntaTipo(numero);
         multiple.setContexto(pregunta.getContexto());
         String[] respuesta = new String[3];
-        respuesta[0]= pregunta.getRespuesta();
-        multiple.setCorrecta(0);
-        int i=1;
+        int nume = numeroRandom(3);
+        respuesta[nume]= pregunta.getRespuesta();
+        multiple.setCorrecta(nume);
+        int i=0;
         do{
             int num = numeroRandom(cantidadIds);
-            PreguntaDirectaTipo preguntaD = acceso.getPreguntaTipo(num);
-            System.out.println(preguntaD.getRespuesta());
-            if(respuesta[i-1].compareTo(preguntaD.getRespuesta())!=0){
-                    respuesta[i]=preguntaD.getRespuesta();
+            if(num!=0) {
+                PreguntaDirectaTipo preguntaD = acceso.getPreguntaTipo(num);
+                System.out.println(String.valueOf(i));
+                if (respuesta[nume].compareTo(preguntaD.getRespuesta()) != 0) {
+                    if(i!=nume) {
+                        respuesta[i] = preguntaD.getRespuesta();
+                    }
                     i++;
+                }
             }
         }while(i<3);
+        multiple.setRespuesta(respuesta);
         return multiple;
     }
     private int numeroRandom(int cant){

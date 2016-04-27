@@ -26,6 +26,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private String resp1, resp2, resp3;
     private int cantidad,correctas;
     private String[] respuestas;
+    private TextView cantidadView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,7 +37,10 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta1 = (Button) this.findViewById(R.id.buttonSelec1);
         respuesta2 = (Button) this.findViewById(R.id.buttonSelec2);
         respuesta3 = (Button) this.findViewById(R.id.buttonSelec3);
+        cantidadView= (TextView) this.findViewById(R.id.txCantidadSel);
         Bundle bundle = getIntent().getExtras();
+        cantidad= Integer.valueOf(bundle.getString("cantidad"));
+        cantidadView.setText(String.valueOf(cantidad)+"/10");
         txtVSeleccion.setText(bundle.getString("pregunta"));
         respuestaCorrecta= bundle.getString("correcta");
 
@@ -44,17 +48,15 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuestas[0]= bundle.getString("respuesta1");
         respuestas[1]= bundle.getString("respuesta2");
         respuestas[2]= bundle.getString("respuesta3");
+
         Random random = new Random();
-        int numero = random.nextInt(3)+1;
-        resp1= respuestas[numero];
-        numero = random.nextInt(3)+1;
-        resp2= respuestas[numero];
-        numero = random.nextInt(3)+1;
-        resp3=respuestas[numero];
+        resp1= respuestas[0];
+        resp2= respuestas[1];
+        resp3=respuestas[2];
         respuesta1.setText(resp1);
         respuesta2.setText(resp2);
         respuesta3.setText(resp3);
-        respuesta1.setOnClickListener(new View.OnClickListener() {
+        respuesta1.setOnClickListener(  new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -81,7 +83,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         if (respuesta.compareTo(this.respuestas[Integer.valueOf(this.respuestaCorrecta)])==0){
             correctas++;
         }
-        if(cantidad<=10){
+        if(cantidad<10){
             jugar();
         }
         else{
@@ -99,6 +101,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         Juego juego = new Juego(this);
         Random random = new Random();
         Intent intent = null;
+        cantidad++;
         int numero = random.nextInt(3) + 1;
 
         if (numero == 1) {
@@ -121,7 +124,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             intent.putExtra("respuesta1",respuestas[0]);
             intent.putExtra("respuesta2",respuestas[1]);
             intent.putExtra("respuesta3",respuestas[2]);
-            intent.putExtra("correcta",multiple.getCorrecta());
+            System.out.println(multiple.getCorrecta());
+            intent.putExtra("correcta",String.valueOf(multiple.getCorrecta()));
 
         }
         intent.putExtra("cantidad",String.valueOf(cantidad));

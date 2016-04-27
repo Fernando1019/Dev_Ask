@@ -90,7 +90,8 @@ public class Menu extends AppCompatActivity {
             intent.putExtra("respuesta1",respuestas[0]);
             intent.putExtra("respuesta2",respuestas[1]);
             intent.putExtra("respuesta3",respuestas[2]);
-            intent.putExtra("correcta",multiple.getCorrecta());
+            System.out.println(multiple.getCorrecta());
+            intent.putExtra("correcta",String.valueOf(multiple.getCorrecta()));
 
         }
 

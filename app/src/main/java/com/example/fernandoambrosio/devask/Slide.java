@@ -28,7 +28,7 @@ public class Slide  extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(conteo<5) {
+        if(conteo<4) {
             flipp.startFlipping();
             flipp.setFlipInterval(3000);
             conteo++;

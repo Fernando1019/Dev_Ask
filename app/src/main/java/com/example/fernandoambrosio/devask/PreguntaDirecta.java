@@ -25,6 +25,7 @@ public class PreguntaDirecta  extends AppCompatActivity {
     private Button  aceptarDirecta;
     private String respuesta;
     private int cantidad,correctas;
+    private TextView cantidadView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -32,38 +33,43 @@ public class PreguntaDirecta  extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.pregunta_directa);
         txtViewPregDirecta = (TextView) this.findViewById(R.id.TxtViewPregDirecta);
+        cantidadView= (TextView) this.findViewById(R.id.txCantidad);
         Bundle bundle = getIntent().getExtras();
         System.out.println(bundle.get("pregunta"));
         txtViewPregDirecta.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
+        cantidadView.setText(String.valueOf(cantidad)+"/10");
         correctas= Integer.valueOf(bundle.getString("correctas"));
         aceptarDirecta = (Button) this.findViewById(R.id.btAceptarDirecta);
         aceptarDirecta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 VerificarPregunta();
-                if(cantidad<=10) {
-                    jugar();
-                }
 
             }
         });
     }
     private void VerificarPregunta(){
-        String respuestaUsuario =  String.valueOf(eTxtRespuesta.getText());
-        if (respuestaUsuario.compareTo(respuesta)==0){
-            correctas++;
+        try {
+            String respuestaUsuario = String.valueOf(eTxtRespuesta.getText());
+            if (respuestaUsuario.compareTo(respuesta) == 0) {
+                correctas++;
+            }
         }
-        if(cantidad<=10){
-            jugar();
+        catch (NullPointerException e){
+
         }
-        else{
-            Juego juego = new Juego(this);
-            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
-            Intent intent = new Intent(this,RankingActivity.class);
-            startActivity(intent);
-            finish();
+        finally {
+            if (cantidad < 10) {
+                jugar();
+            } else {
+                Juego juego = new Juego(this);
+                juego.actualizarLogro(10, Integer.valueOf(this.correctas));
+                Intent intent = new Intent(this, RankingActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
     }
@@ -95,7 +101,8 @@ public class PreguntaDirecta  extends AppCompatActivity {
             intent.putExtra("respuesta1",respuestas[0]);
             intent.putExtra("respuesta2",respuestas[1]);
             intent.putExtra("respuesta3",respuestas[2]);
-            intent.putExtra("correcta",multiple.getCorrecta());
+            System.out.println(multiple.getCorrecta());
+            intent.putExtra("correcta",String.valueOf(multiple.getCorrecta()));
 
         }
         intent.putExtra("cantidad",String.valueOf(cantidad));

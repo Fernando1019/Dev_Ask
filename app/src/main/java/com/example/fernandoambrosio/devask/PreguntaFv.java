@@ -2,6 +2,7 @@ package com.example.fernandoambrosio.devask;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,6 +24,7 @@ public class PreguntaFv extends AppCompatActivity {
     private TextView preguntaFV;
     private Button botonFalso;
     private  Button botonVerdadero;
+    private TextView cantidadView;
     private String respuesta;
     private int cantidad,correctas;
     @Override
@@ -34,9 +36,12 @@ public class PreguntaFv extends AppCompatActivity {
         preguntaFV = (TextView) this.findViewById(R.id.tvPreguntaFv);
         botonFalso = (Button) this.findViewById(R.id.buttonF);
         botonVerdadero = (Button) this.findViewById(R.id.buttonV);
+        cantidadView= (TextView) this.findViewById(R.id.txCantidadFv);
         Bundle bundle = getIntent().getExtras();
         preguntaFV.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
+        cantidad= Integer.valueOf(bundle.getString("cantidad"));
+        cantidadView.setText(String.valueOf(cantidad)+"/10");
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,13 +57,15 @@ public class PreguntaFv extends AppCompatActivity {
     }
 
     public void verificarPregunta(String respuestaSeleccionada){
+
         if (this.respuesta.compareTo(respuestaSeleccionada)==0){
             correctas++;
         }
-        if(cantidad<=10){
+        if(cantidad<10){
             jugar();
         }
         else{
+            cantidad++;
             Juego juego = new Juego(this);
             juego.actualizarLogro(10, Integer.valueOf(this.correctas));
             Intent intent = new Intent(this,RankingActivity.class);
@@ -93,7 +100,8 @@ public class PreguntaFv extends AppCompatActivity {
             intent.putExtra("respuesta1",respuestas[0]);
             intent.putExtra("respuesta2",respuestas[1]);
             intent.putExtra("respuesta3",respuestas[2]);
-            intent.putExtra("correcta",multiple.getCorrecta());
+            System.out.println(multiple.getCorrecta());
+            intent.putExtra("correcta",String.valueOf(multiple.getCorrecta()));
 
         }
         intent.putExtra("cantidad",String.valueOf(cantidad));
