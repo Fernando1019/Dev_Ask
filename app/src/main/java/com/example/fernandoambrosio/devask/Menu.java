@@ -69,34 +69,34 @@ public class Menu extends AppCompatActivity {
         Juego juego = new Juego(this);
         Random random = new Random();
         int numero = random.nextInt(3) + 1;
-
+        Intent intent = null;
         if (numero == 1) {
             PreguntaVF vf = juego.crearPreguntaVf();
-            Intent intent = new Intent(Menu.this, PreguntaFv.class);
+            intent = new Intent(Menu.this, PreguntaFv.class);
             intent.putExtra("pregunta",vf.getContexto());
             intent.putExtra("respuesta",vf.getRespuesta());
-            startActivity(intent);
-            finish();
         }
         if (numero == 2) {
             PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
-            Intent intent = new Intent(Menu.this, PreguntaDirecta.class);
+             intent = new Intent(Menu.this, PreguntaDirecta.class);
             intent.putExtra("pregunta",directa.getContexto());
             intent.putExtra("pregunta",directa.getRespuesta());
-            startActivity(intent);
-            finish();
         }
         if (numero == 3) {
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
-            Intent intent = new Intent(Menu.this, PreguntaSeleccion.class);
+            intent = new Intent(Menu.this, PreguntaSeleccion.class);
             String[] respuestas = multiple.getRespuesta();
             intent.putExtra("pregunta",multiple.getContexto());
             intent.putExtra("respuesta1",respuestas[0]);
             intent.putExtra("respuesta2",respuestas[1]);
             intent.putExtra("respuesta3",respuestas[2]);
             intent.putExtra("correcta",multiple.getCorrecta());
-            startActivity(intent);
-            finish();
+
         }
+
+        intent.putExtra("cantidad",String.valueOf(1));
+        intent.putExtra("correctas",String.valueOf(0));
+        startActivity(intent);
+        finish();
     }
 }

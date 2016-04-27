@@ -3,6 +3,7 @@ package com.example.fernandoambrosio.devask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +22,10 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private Button respuesta1;
     private Button respuesta2;
     private Button respuesta3;
-    private String respuesta;
+    private String respuestaCorrecta;
+    private String resp1, resp2, resp3;
+    private int cantidad,correctas;
+    private String[] respuestas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,9 +38,63 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta3 = (Button) this.findViewById(R.id.buttonSelec3);
         Bundle bundle = getIntent().getExtras();
         txtVSeleccion.setText(bundle.getString("pregunta"));
-        respuesta= bundle.getString("respuesta");
+        respuestaCorrecta= bundle.getString("correcta");
+
+        respuestas = new String[3];
+        respuestas[1]= bundle.getString("respuesta1");
+        respuestas[2]= bundle.getString("respuesta2");
+        respuestas[3]= bundle.getString("respuesta3");
+        Random random = new Random();
+        int numero = random.nextInt(3)+1;
+        resp1= respuestas[numero];
+        numero = random.nextInt(3)+1;
+        resp2= respuestas[numero];
+        numero = random.nextInt(3)+1;
+        resp3=respuestas[numero];
+        respuesta1.setText(resp1);
+        respuesta2.setText(resp2);
+        respuesta3.setText(resp3);
+        respuesta1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                verificar(String.valueOf(respuesta1.getText()));
+                }});
+
+        respuesta2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificar(String.valueOf(respuesta2.getText()));
+            }
+        });
+
+        respuesta3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificar(String.valueOf(respuesta3.getText()));
+            }
+        });
+        }
+
+
+    public void verificar(String respuesta){
+        if (respuesta.compareTo(this.respuestas[Integer.valueOf(this.respuestaCorrecta)])==0){
+            correctas++;
+        }
+        if(cantidad<=10){
+            jugar();
+        }
+        else{
+            Juego juego = new Juego(this);
+            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
+            Intent intent = new Intent(this,RankingActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
+
+
     public  void jugar() {
         Juego juego = new Juego(this);
         Random random = new Random();
@@ -66,6 +124,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             intent.putExtra("correcta",multiple.getCorrecta());
 
         }
+        intent.putExtra("cantidad",String.valueOf(cantidad));
+        intent.putExtra("correctas",String.valueOf(correctas));
         startActivity(intent);
         finish();
     }

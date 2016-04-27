@@ -23,7 +23,7 @@ public class PreguntaDirecta  extends AppCompatActivity {
     private TextView txtViewPregDirecta;
     private Button  aceptarDirecta;
     private String respuesta;
-    private int cantidad;
+    private int cantidad,correctas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,12 +34,16 @@ public class PreguntaDirecta  extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         txtViewPregDirecta.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
+        cantidad= Integer.valueOf(bundle.getString("cantidad"));
+        correctas= Integer.valueOf(bundle.getString("correctas"));
         aceptarDirecta = (Button) this.findViewById(R.id.btAceptarDirecta);
         aceptarDirecta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 VerificarPregunta();
-                jugar();
+                if(cantidad<=10) {
+                    jugar();
+                }
 
             }
         });
@@ -47,10 +51,22 @@ public class PreguntaDirecta  extends AppCompatActivity {
     private void VerificarPregunta(){
         String respuestaUsuario =  String.valueOf(eTxtRespuesta.getText());
         if (respuestaUsuario.compareTo(respuesta)==0){
-
+            correctas++;
         }
+        if(cantidad<=10){
+            jugar();
+        }
+        else{
+            Juego juego = new Juego(this);
+            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
+            Intent intent = new Intent(this,RankingActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
     public  void jugar() {
+        cantidad++;
         Juego juego = new Juego(this);
         Random random = new Random();
         Intent intent = null;
@@ -79,6 +95,8 @@ public class PreguntaDirecta  extends AppCompatActivity {
             intent.putExtra("correcta",multiple.getCorrecta());
 
         }
+        intent.putExtra("cantidad",String.valueOf(cantidad));
+        intent.putExtra("correctas",String.valueOf(correctas));
         startActivity(intent);
         finish();
     }
