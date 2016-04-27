@@ -21,7 +21,9 @@ public class Juego {
     public PreguntaVF crearPreguntaVf(){
         int cantidadIds= acceso.cantidadDatosTabla("VF");
         int numero = numeroRandom(cantidadIds);
-        return acceso.getPregutaVF(numero);
+        PreguntaVF fv =  acceso.getPregutaVF(numero);
+        System.out.println(fv.getRespuesta());
+        return fv;
     }
     public PreguntaDirectaTipo crearPreguntaDirecta(){
         int cantidadIds= acceso.cantidadDatosTabla("Directa");
@@ -41,6 +43,7 @@ public class Juego {
         do{
             int num = numeroRandom(cantidadIds);
             PreguntaDirectaTipo preguntaD = acceso.getPreguntaTipo(num);
+            System.out.println(preguntaD.getRespuesta());
             if(respuesta[i-1].compareTo(preguntaD.getRespuesta())!=0){
                     respuesta[i]=preguntaD.getRespuesta();
                     i++;

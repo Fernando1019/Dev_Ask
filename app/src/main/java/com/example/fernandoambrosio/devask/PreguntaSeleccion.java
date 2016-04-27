@@ -41,9 +41,9 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuestaCorrecta= bundle.getString("correcta");
 
         respuestas = new String[3];
-        respuestas[1]= bundle.getString("respuesta1");
-        respuestas[2]= bundle.getString("respuesta2");
-        respuestas[3]= bundle.getString("respuesta3");
+        respuestas[0]= bundle.getString("respuesta1");
+        respuestas[1]= bundle.getString("respuesta2");
+        respuestas[2]= bundle.getString("respuesta3");
         Random random = new Random();
         int numero = random.nextInt(3)+1;
         resp1= respuestas[numero];
@@ -111,7 +111,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
             intent = new Intent(this, PreguntaDirecta.class);
             intent.putExtra("pregunta",directa.getContexto());
-            intent.putExtra("pregunta",directa.getRespuesta());
+            intent.putExtra("respuesta",directa.getRespuesta());
         }
         if (numero == 3) {
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();

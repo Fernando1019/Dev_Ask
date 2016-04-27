@@ -2,6 +2,7 @@ package com.example.fernandoambrosio.devask;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,6 +33,7 @@ public class PreguntaDirecta  extends AppCompatActivity {
         setContentView(R.layout.pregunta_directa);
         txtViewPregDirecta = (TextView) this.findViewById(R.id.TxtViewPregDirecta);
         Bundle bundle = getIntent().getExtras();
+        System.out.println(bundle.get("pregunta"));
         txtViewPregDirecta.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
@@ -74,19 +76,20 @@ public class PreguntaDirecta  extends AppCompatActivity {
 
         if (numero == 1) {
             PreguntaVF vf = juego.crearPreguntaVf();
-             intent = new Intent(PreguntaDirecta.this, PreguntaFv.class);
+             intent = new Intent(this, PreguntaFv.class);
             intent.putExtra("pregunta",vf.getContexto());
             intent.putExtra("respuesta",vf.getRespuesta());
         }
         if (numero == 2) {
             PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
-             intent = new Intent(PreguntaDirecta.this, PreguntaDirecta.class);
+             intent = new Intent(this, PreguntaDirecta.class);
             intent.putExtra("pregunta",directa.getContexto());
-            intent.putExtra("pregunta",directa.getRespuesta());
+            intent.putExtra("respuesta",directa.getRespuesta());
         }
+        //preguntaMultiple
         if (numero == 3) {
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
-             intent = new Intent(PreguntaDirecta.this, PreguntaSeleccion.class);
+             intent = new Intent(this, PreguntaSeleccion.class);
             String[] respuestas = multiple.getRespuesta();
             intent.putExtra("pregunta",multiple.getContexto());
             intent.putExtra("respuesta1",respuestas[0]);

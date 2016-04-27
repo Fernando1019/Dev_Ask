@@ -41,7 +41,7 @@
                 android:text="PREGUNTA"
                 android:id="@+id/TxtViewPregDirecta"
                 android:textColor="#000000"
-                android:textSize="28dp" />
+                android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout

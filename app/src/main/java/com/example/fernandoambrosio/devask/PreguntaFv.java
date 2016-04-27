@@ -83,7 +83,7 @@ public class PreguntaFv extends AppCompatActivity {
             PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
             intent = new Intent(this, PreguntaDirecta.class);
             intent.putExtra("pregunta",directa.getContexto());
-            intent.putExtra("pregunta",directa.getRespuesta());
+            intent.putExtra("respuesta",directa.getRespuesta());
         }
         if (numero == 3) {
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();

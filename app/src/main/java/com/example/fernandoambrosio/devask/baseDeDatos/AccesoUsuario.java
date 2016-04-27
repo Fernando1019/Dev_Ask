@@ -34,7 +34,6 @@ public class AccesoUsuario {
     public String getUsuario(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta = "SELECT "+Usuario.COLUMNA_NOMBRE +" FROM "+Usuario.TABLE_NAME+" WHERE "+Usuario.COLUMNA_ID+"= 1";
-        System.out.println(consulta);
         Usuario usuario = new Usuario();
         Cursor cursor = db.rawQuery(consulta, null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {

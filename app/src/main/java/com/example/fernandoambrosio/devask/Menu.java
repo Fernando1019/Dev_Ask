@@ -80,7 +80,7 @@ public class Menu extends AppCompatActivity {
             PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
              intent = new Intent(Menu.this, PreguntaDirecta.class);
             intent.putExtra("pregunta",directa.getContexto());
-            intent.putExtra("pregunta",directa.getRespuesta());
+            intent.putExtra("respuesta",directa.getRespuesta());
         }
         if (numero == 3) {
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
