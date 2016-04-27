@@ -96,13 +96,18 @@ public class AccesoJuego {
     public void actualizarCantidades(int correctas, int cantidad){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="UPDATE Logro SET totalPregunta= "+String.valueOf(cantidad)+", nombre="+String.valueOf(correctas)+" WHERE idLogro=1";
+        System.out.println(consulta);
         db.rawQuery(consulta,null);
         db.close();
     }
     public void insertCantidades(int correctas, int cantidad){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="INSERT INT Logro VALUES(1,"+String.valueOf(correctas)+", "+String.valueOf(cantidad)+", 1)";
-        db.rawQuery(consulta,null);
+        ContentValues values = new ContentValues();
+        values.put("idLogro",1);
+        values.put("correctas",correctas);
+        values.put("totalPregunta",10);
+        values.put("idJugador",1);
+        long StudentId =db.insert("Logro",null,values);
         db.close();
     }
 }

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
@@ -27,6 +29,7 @@ public class PreguntaFv extends AppCompatActivity {
     private TextView cantidadView;
     private String respuesta;
     private int cantidad,correctas;
+    private TextView cantidadCorrectas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,11 +40,14 @@ public class PreguntaFv extends AppCompatActivity {
         botonFalso = (Button) this.findViewById(R.id.buttonF);
         botonVerdadero = (Button) this.findViewById(R.id.buttonV);
         cantidadView= (TextView) this.findViewById(R.id.txCantidadFv);
+        cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
         Bundle bundle = getIntent().getExtras();
         preguntaFV.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
+        correctas= Integer.valueOf(bundle.getString("correctas"));
+        cantidadCorrectas.setText(String.valueOf(correctas));
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,12 +66,19 @@ public class PreguntaFv extends AppCompatActivity {
 
         if (this.respuesta.compareTo(respuestaSeleccionada)==0){
             correctas++;
+            Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
+        else{
+            Toast toast = Toast.makeText(this,"incorrecto",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
         }
         if(cantidad<10){
             jugar();
         }
         else{
-            cantidad++;
             Juego juego = new Juego(this);
             juego.actualizarLogro(10, Integer.valueOf(this.correctas));
             Intent intent = new Intent(this,RankingActivity.class);
@@ -75,6 +88,7 @@ public class PreguntaFv extends AppCompatActivity {
 
     }
     public  void jugar() {
+        cantidad++;
         Juego juego = new Juego(this);
         Random random = new Random();
         Intent intent = null;

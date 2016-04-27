@@ -3,10 +3,12 @@ package com.example.fernandoambrosio.devask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
@@ -27,6 +29,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private int cantidad,correctas;
     private String[] respuestas;
     private TextView cantidadView;
+    private TextView cantidadCorrectas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,11 +41,15 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta2 = (Button) this.findViewById(R.id.buttonSelec2);
         respuesta3 = (Button) this.findViewById(R.id.buttonSelec3);
         cantidadView= (TextView) this.findViewById(R.id.txCantidadSel);
+        cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         Bundle bundle = getIntent().getExtras();
+        this.respuestaCorrecta= bundle.getString("correcta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         txtVSeleccion.setText(bundle.getString("pregunta"));
-        respuestaCorrecta= bundle.getString("correcta");
+
+        correctas= Integer.valueOf(bundle.getString("correctas"));
+        cantidadCorrectas.setText(String.valueOf(correctas));
 
         respuestas = new String[3];
         respuestas[0]= bundle.getString("respuesta1");
@@ -82,6 +89,15 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     public void verificar(String respuesta){
         if (respuesta.compareTo(this.respuestas[Integer.valueOf(this.respuestaCorrecta)])==0){
             correctas++;
+            Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
+        else
+        {
+            Toast toast = Toast.makeText(this,"incorrecto",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
         }
         if(cantidad<10){
             jugar();

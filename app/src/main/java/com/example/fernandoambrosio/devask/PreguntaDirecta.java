@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
+
+import org.w3c.dom.Text;
 
 import java.util.Random;
 
@@ -26,6 +30,7 @@ public class PreguntaDirecta  extends AppCompatActivity {
     private String respuesta;
     private int cantidad,correctas;
     private TextView cantidadView;
+    private TextView cantidadCorrectas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,6 +39,7 @@ public class PreguntaDirecta  extends AppCompatActivity {
         setContentView(R.layout.pregunta_directa);
         txtViewPregDirecta = (TextView) this.findViewById(R.id.TxtViewPregDirecta);
         cantidadView= (TextView) this.findViewById(R.id.txCantidad);
+        cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasD);
         Bundle bundle = getIntent().getExtras();
         System.out.println(bundle.get("pregunta"));
         txtViewPregDirecta.setText(bundle.getString("pregunta"));
@@ -41,6 +47,7 @@ public class PreguntaDirecta  extends AppCompatActivity {
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         correctas= Integer.valueOf(bundle.getString("correctas"));
+        cantidadCorrectas.setText(String.valueOf(correctas));
         aceptarDirecta = (Button) this.findViewById(R.id.btAceptarDirecta);
         aceptarDirecta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +61,21 @@ public class PreguntaDirecta  extends AppCompatActivity {
         try {
             String respuestaUsuario = String.valueOf(eTxtRespuesta.getText());
             if (respuestaUsuario.compareTo(respuesta) == 0) {
+                Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
                 correctas++;
+            }
+            else{
+                Toast toast = Toast.makeText(this,"incorrecto",Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
             }
         }
         catch (NullPointerException e){
-
+            Toast toast = Toast.makeText(this,"incorrecto",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
         }
         finally {
             if (cantidad < 10) {
