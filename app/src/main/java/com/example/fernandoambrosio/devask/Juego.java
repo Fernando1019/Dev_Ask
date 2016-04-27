@@ -52,4 +52,10 @@ public class Juego {
         Random random = new Random();
         return random.nextInt(cant);
     }
+    public void actualizarLogro(int cantidadPreguntas, int correctas){
+        int[] cantidadesAnteriores = acceso.CantidadPreguntas();
+        int nuevaCantidadCorrectas= cantidadesAnteriores[0]+correctas;
+        int nuevaCantidadPreguntas= cantidadesAnteriores[1]+cantidadPreguntas;
+        acceso.actualizarCantidades(nuevaCantidadCorrectas,nuevaCantidadPreguntas);
+    }
 }

@@ -23,6 +23,7 @@ public class PreguntaFv extends AppCompatActivity {
     private Button botonFalso;
     private  Button botonVerdadero;
     private String respuesta;
+    private int cantidad,correctas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,7 +37,9 @@ public class PreguntaFv extends AppCompatActivity {
         preguntaFV.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
     }
-
+    public void verificarPregunta(){
+        cantidad++;
+    }
     public  void jugar() {
         Juego juego = new Juego(this);
         Random random = new Random();
@@ -66,6 +69,8 @@ public class PreguntaFv extends AppCompatActivity {
             intent.putExtra("correcta",multiple.getCorrecta());
 
         }
+        intent.putExtra("cantidad",String.valueOf(cantidad));
+        intent.putExtra("correctas",String.valueOf(correctas));
         startActivity(intent);
         finish();
     }

@@ -21,7 +21,9 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private Button respuesta1;
     private Button respuesta2;
     private Button respuesta3;
-    private String respuesta;
+    private String respuestaCorrecta;
+    private String resp1, resp2, resp3;
+    private int cantidad,correctas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,7 +36,17 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta3 = (Button) this.findViewById(R.id.buttonSelec3);
         Bundle bundle = getIntent().getExtras();
         txtVSeleccion.setText(bundle.getString("pregunta"));
-        respuesta= bundle.getString("respuesta");
+        respuestaCorrecta= bundle.getString("correcta");
+        Random random = new Random();
+        int numero = random.nextInt(3)+1;
+        resp1= bundle.getString("respuesta"+String.valueOf(numero));
+        numero = random.nextInt(3)+1;
+        resp2= bundle.getString("respuesta"+String.valueOf(numero));
+        numero = random.nextInt(3)+1;
+        resp3= bundle.getString("respuesta"+String.valueOf(numero));
+        respuesta1.setText(resp1);
+        respuesta2.setText(resp2);
+        respuesta3.setText(resp3);
 
     }
     public  void jugar() {
@@ -66,6 +78,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             intent.putExtra("correcta",multiple.getCorrecta());
 
         }
+        intent.putExtra("cantidad",String.valueOf(cantidad));
+        intent.putExtra("correctas",String.valueOf(correctas));
         startActivity(intent);
         finish();
     }

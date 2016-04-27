@@ -18,7 +18,6 @@ public class AccesoUsuario {
     }
 
     public int insert(Usuario usuario){
-        delete(1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Usuario.COLUMNA_ID,1);
@@ -29,7 +28,7 @@ public class AccesoUsuario {
     }
     private void delete(int alumno_id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(Usuario.TABLE_NAME,Usuario.COLUMNA_ID+"= ?",new String[]{String.valueOf(alumno_id)});
+        db.delete(Usuario.TABLE_NAME,Usuario.COLUMNA_ID+"= 1",new String[]{String.valueOf(alumno_id)});
         db.close();
     }
     public String getUsuario(){
@@ -50,4 +49,5 @@ public class AccesoUsuario {
         db.close();
         return usuario.getNombre();
     }
+
 }

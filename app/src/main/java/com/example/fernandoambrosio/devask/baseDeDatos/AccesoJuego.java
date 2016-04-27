@@ -1,5 +1,6 @@
 package com.example.fernandoambrosio.devask.baseDeDatos;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -68,5 +69,23 @@ public class AccesoJuego {
         db.close();
         return preguntavf;
     }
-
+    public int[] CantidadPreguntas(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String consulta = "SELECT correctas, totalPregunta from Logro";
+        Cursor cursor = db.rawQuery(consulta,null);
+        int[] cantidades = new int[2];
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                cantidades[0]=Integer.valueOf(cursor.getString(cursor.getColumnIndex("correctas")));
+                cantidades[1]=Integer.valueOf(cursor.getString(cursor.getColumnIndex("totalPregunta")));
+                cursor.close();
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return  cantidades;
+    }
+    public void actualizarCantidades(int correctas, int cantidad){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String consulta ="UPDATE Logro SET totalPregunta= "+String.valueOf(cantidad)+", nombre="+String.valueOf(correctas)+" WHERE idLogro=1";
+    }
 }
