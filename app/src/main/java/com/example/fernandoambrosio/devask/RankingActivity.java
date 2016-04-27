@@ -35,7 +35,7 @@ public class RankingActivity extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RankingActivity.this, MainActivity.class);
+                Intent intent = new Intent(RankingActivity.this, Menu.class);
                 startActivity(intent);
                 finish();
             }

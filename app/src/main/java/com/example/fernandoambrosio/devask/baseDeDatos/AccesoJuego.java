@@ -21,15 +21,17 @@ public class AccesoJuego {
 
     public PreguntaDirectaTipo getPreguntaTipo(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta = "SELECT contexto,  Respuesta  FROM Pregunta INNER JOIN" +
-                "(SELECT Pregunta_idPregunta,Respuesta  FROM RespuestaDirecta WHERE idRespuestaDirecta = "+
-                        String.valueOf(id)+") AS directa ON directa.Pregunta_idPregunta = " +
-                        "directa.Pregunta_idPregunta;";
+        String consulta = "SELECT contexto,  directa.Respuesta AS resp  FROM Preguntas INNER JOIN" +
+                "(SELECT idPregunta AS id , Respuesta  FROM RespuestaDirecta WHERE idRespuestaDirecta = "+
+                        String.valueOf(id)+") AS directa ON directa.id  = " +
+                        "Preguntas.idPregunta;";
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaDirectaTipo preguntaDirectaTipo = new PreguntaDirectaTipo();
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
-                preguntaDirectaTipo.setRespuesta(cursor.getString(cursor.getColumnIndex("Respuesta")));
+                preguntaDirectaTipo.setRespuesta(cursor.getString(cursor.getColumnIndex("resp")));
+                System.out.println(preguntaDirectaTipo.getRespuesta());
                 preguntaDirectaTipo.setContexto(cursor.getString(cursor.getColumnIndex("contexto")));
                 cursor.close();
             } while (cursor.moveToNext());
@@ -41,6 +43,7 @@ public class AccesoJuego {
     public int cantidadDatosTabla(String tabla){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="SELECT count(idRespuesta"+tabla+") AS ids  FROM Respuesta"+tabla;
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int ids=0;
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
@@ -54,14 +57,15 @@ public class AccesoJuego {
     }
     public PreguntaVF getPregutaVF(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="SELECT contexto,  respuesta  FROM Pregunta INNER JOIN(SELECT " +
-                "Pregunta_idPregunta, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
-                ") AS directa ON directa.Pregunta_idPregunta = directa.Pregunta_idPregunta;";
+        String consulta ="SELECT contexto,  directa.respuesta AS resp  FROM Preguntas INNER JOIN(SELECT " +
+                "idPregunta, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
+                ") AS directa ON directa.idPregunta = Preguntas.idPregunta;";
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaVF preguntavf = new PreguntaVF();
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
-                preguntavf.setRespuesta(Boolean.valueOf(cursor.getString(cursor.getColumnIndex("Respuesta"))));
+                preguntavf.setRespuesta(cursor.getString(cursor.getColumnIndex("resp")));
                 preguntavf.setContexto(cursor.getString(cursor.getColumnIndex("contexto")));
                 cursor.close();
             } while (cursor.moveToNext());
@@ -72,6 +76,7 @@ public class AccesoJuego {
     public int[] CantidadPreguntas(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta = "SELECT correctas, totalPregunta from Logro";
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int[] cantidades = new int[2];
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
@@ -91,13 +96,18 @@ public class AccesoJuego {
     public void actualizarCantidades(int correctas, int cantidad){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="UPDATE Logro SET totalPregunta= "+String.valueOf(cantidad)+", nombre="+String.valueOf(correctas)+" WHERE idLogro=1";
+        System.out.println(consulta);
         db.rawQuery(consulta,null);
         db.close();
     }
     public void insertCantidades(int correctas, int cantidad){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="INSERT INT Logro VALUES(1,"+String.valueOf(correctas)+", "+String.valueOf(cantidad)+", 1)";
-        db.rawQuery(consulta,null);
+        ContentValues values = new ContentValues();
+        values.put("idLogro",1);
+        values.put("correctas",correctas);
+        values.put("totalPregunta",10);
+        values.put("idJugador",1);
+        long StudentId =db.insert("Logro",null,values);
         db.close();
     }
 }
