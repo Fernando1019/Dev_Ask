@@ -36,6 +36,7 @@ public class Slide  extends AppCompatActivity implements View.OnClickListener {
         else{
             Intent intent = new Intent(Slide.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
     }

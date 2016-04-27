@@ -53,7 +53,17 @@ public class PreguntaDirecta  extends AppCompatActivity {
         if (respuestaUsuario.compareTo(respuesta)==0){
             correctas++;
         }
-        cantidad++;
+        if(cantidad<=10){
+            jugar();
+        }
+        else{
+            Juego juego = new Juego(this);
+            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
+            Intent intent = new Intent(this,RankingActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
     public  void jugar() {
         cantidad++;

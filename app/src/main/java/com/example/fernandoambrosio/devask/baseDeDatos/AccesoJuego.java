@@ -81,11 +81,23 @@ public class AccesoJuego {
                 cursor.close();
             } while (cursor.moveToNext());
         }
+        else{
+            cantidades[0]=0;
+            cantidades[1]=0;
+        }
         db.close();
         return  cantidades;
     }
     public void actualizarCantidades(int correctas, int cantidad){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="UPDATE Logro SET totalPregunta= "+String.valueOf(cantidad)+", nombre="+String.valueOf(correctas)+" WHERE idLogro=1";
+        db.rawQuery(consulta,null);
+        db.close();
+    }
+    public void insertCantidades(int correctas, int cantidad){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String consulta ="INSERT INT Logro VALUES(1,"+String.valueOf(correctas)+", "+String.valueOf(cantidad)+", 1)";
+        db.rawQuery(consulta,null);
+        db.close();
     }
 }

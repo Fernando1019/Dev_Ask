@@ -3,6 +3,7 @@ package com.example.fernandoambrosio.devask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,9 +37,35 @@ public class PreguntaFv extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         preguntaFV.setText(bundle.getString("pregunta"));
         respuesta= bundle.getString("respuesta");
+        botonFalso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificarPregunta("Falso");
+            }
+        });
+        botonVerdadero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificarPregunta("Verdadero");
+            }
+        });
     }
-    public void verificarPregunta(){
-        cantidad++;
+
+    public void verificarPregunta(String respuestaSeleccionada){
+        if (this.respuesta.compareTo(respuestaSeleccionada)==0){
+            correctas++;
+        }
+        if(cantidad<=10){
+            jugar();
+        }
+        else{
+            Juego juego = new Juego(this);
+            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
+            Intent intent = new Intent(this,RankingActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
     public  void jugar() {
         Juego juego = new Juego(this);

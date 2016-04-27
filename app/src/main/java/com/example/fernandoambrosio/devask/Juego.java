@@ -56,6 +56,19 @@ public class Juego {
         int[] cantidadesAnteriores = acceso.CantidadPreguntas();
         int nuevaCantidadCorrectas= cantidadesAnteriores[0]+correctas;
         int nuevaCantidadPreguntas= cantidadesAnteriores[1]+cantidadPreguntas;
-        acceso.actualizarCantidades(nuevaCantidadCorrectas,nuevaCantidadPreguntas);
+        if (cantidadesAnteriores[0]==0){
+            acceso.insertCantidades(nuevaCantidadCorrectas, nuevaCantidadPreguntas);
+        }
+        else {
+            acceso.actualizarCantidades(nuevaCantidadCorrectas, nuevaCantidadPreguntas);
+        }
+    }
+    public int[] seleccionarLogros(){
+        int[] retorno = new int[3];
+        int[] cantidades= acceso.CantidadPreguntas();
+        retorno[0]=cantidades[0];
+        retorno[1]=cantidades[1];
+        retorno[2]=cantidades[1]-cantidades[0];
+        return retorno;
     }
 }
