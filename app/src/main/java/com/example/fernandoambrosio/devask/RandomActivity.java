@@ -3,13 +3,10 @@ package com.example.fernandoambrosio.devask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.example.fernandoambrosio.devask.tipos.Pregunta;
+import com.example.fernandoambrosio.devask.Logica.Juego;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;

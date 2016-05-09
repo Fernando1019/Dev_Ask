@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.fernandoambrosio.devask.Logica.Juego;
 
 /**
  * Created by josueChaqui on 19/04/2016.

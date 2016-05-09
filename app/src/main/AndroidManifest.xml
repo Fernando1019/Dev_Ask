@@ -39,11 +39,6 @@
 
         </activity>
 
-        <activity android:name=".PreguntaDirecta"
-            android:screenOrientation="portrait">
-
-        </activity>
-
         <activity android:name=".PreguntaSeleccion"
             android:screenOrientation="portrait">
 
