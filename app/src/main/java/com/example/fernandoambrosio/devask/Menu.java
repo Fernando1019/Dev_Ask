@@ -6,15 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.fernandoambrosio.devask.Logica.Juego;
 import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
 import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
-import com.example.fernandoambrosio.devask.tipos.Usuario;
 
 import java.util.Random;
 

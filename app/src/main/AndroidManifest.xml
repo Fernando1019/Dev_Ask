@@ -2,15 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fernandoambrosio.devask">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name=".EntradaActivity"
+        <activity
+            android:name=".EntradaActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,47 +23,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Menu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RandomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PreguntaFv"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PreguntaSeleccion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RankingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Slide"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".Menu"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".RandomActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".PreguntaFv"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".PreguntaDirecta"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".PreguntaSeleccion"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".RankingActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".Slide"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+        <service
+            android:name=".Logica.Cronometro"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

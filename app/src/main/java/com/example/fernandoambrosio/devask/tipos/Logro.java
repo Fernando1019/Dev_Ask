@@ -31,6 +31,9 @@ public class Logro {
 
     public void setRespuestasIncorrectas(int respuestasIncorrectas) {
         this.respuestasIncorrectas = respuestasIncorrectas;
+
+
+
     }
 
     public int getTotalRespuestas() {
