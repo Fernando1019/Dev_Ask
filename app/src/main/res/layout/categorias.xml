@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right">
+
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="205dp"
+            android:background="@drawable/cultura"
+            android:id="@+id/imageView7" />
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="205dp"
+            android:background="@drawable/geografia"
+            android:id="@+id/imageView9"
+            android:layout_gravity="left|bottom" />
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="205dp"
+            android:background="@drawable/gastronomia"
+            android:id="@+id/imageView8"
+            android:layout_gravity="right|top" />
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="200dp"
+            android:background="@drawable/musica"
+            android:id="@+id/imageView10"
+            android:layout_gravity="right|bottom" />
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="200dp"
+            android:background="@drawable/personajes"
+            android:id="@+id/imageView11"
+            android:layout_gravity="right|center_vertical" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_gravity="left|top"
+            android:text="Cultura" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText3"
+            android:layout_gravity="left|bottom"
+            android:text="Geografia" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText4"
+            android:layout_gravity="right|bottom"
+            android:text="Musica" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText5"
+            android:layout_gravity="right|center_vertical"
+            android:text="Personajes"
+            android:textColor="@color/abc_primary_text_material_light" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText6"
+            android:layout_gravity="left|center_vertical"
+            android:text="ALeatorio" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText2"
+            android:layout_gravity="right|top"
+            android:text="gastronomia "
+            android:textColor="@color/abc_input_method_navigation_guard" />
+    </FrameLayout>
+</LinearLayout>
