@@ -27,7 +27,7 @@ public class PreguntaFv extends AppCompatActivity {
     private  Button botonVerdadero;
     private TextView cantidadView;
     private String respuesta;
-    private int cantidad,correctas;
+    private int cantidad,correctas, categoria;
     private TextView cantidadCorrectas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,22 @@ public class PreguntaFv extends AppCompatActivity {
         cantidadView= (TextView) this.findViewById(R.id.txCantidadFv);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
         Bundle bundle = getIntent().getExtras();
-        preguntaFV.setText(bundle.getString("pregunta"));
+        categoria = bundle.getInt("idCategoria");
         respuesta= bundle.getString("respuesta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
-        cantidadView.setText(String.valueOf(cantidad)+"/10");
         correctas= Integer.valueOf(bundle.getString("correctas"));
+
+        preguntaFV.setText(bundle.getString("pregunta"));
+        cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));
+
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verificarPregunta("Falso");
             }
         });
+
         botonVerdadero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +92,7 @@ public class PreguntaFv extends AppCompatActivity {
     }
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
-        interfazJuego.seleccionarJuego(this.cantidad, this.correctas);
+        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
         finish();
     }
 }

@@ -40,17 +40,19 @@ public class AccesoJuego {
         return preguntaDirectaTipo;
     }
 
-    public int cantidadDatosTabla(String tabla){
+    public int[] cantidadDatosTabla(String tabla, int idCategoria){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="SELECT count(idRespuesta"+tabla+") AS ids  FROM Respuesta"+tabla;
+        String consulta ="SELECT idRespuesta"+tabla+" AS ids  FROM Respuesta"+tabla+""+String.valueOf(idCategoria);
         System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
-        int ids=0;
+        int ids[]=new int[cursor.getCount()];
+        int a=0;
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
-                ids= cursor.getInt(cursor.getColumnIndex("ids"));
-                cursor.close();
+                ids[a]= cursor.getInt(cursor.getColumnIndex("ids"));
+                a++;
             } while (cursor.moveToNext());
+            cursor.close();
         }
         db.close();
         return ids;
@@ -109,5 +111,19 @@ public class AccesoJuego {
         values.put("idJugador",1);
         long StudentId =db.insert("Logro",null,values);
         db.close();
+    }
+    public int seleccionarIdCategoria(String categoria){
+        int idCategoria=0;
+        SQLiteDatabase db  = dbHelper.getWritableDatabase();
+        String consulta ="SELECT idCategoria FROM Categoria WHERE  nombre=\""+categoria+"\"";
+        System.out.println(consulta);
+        Cursor cursor = db.rawQuery(consulta,null);
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                idCategoria=Integer.valueOf(cursor.getString(cursor.getColumnIndex("idCategoria")));
+                cursor.close();
+            } while (cursor.moveToNext());
+        }
+        return idCategoria;
     }
 }

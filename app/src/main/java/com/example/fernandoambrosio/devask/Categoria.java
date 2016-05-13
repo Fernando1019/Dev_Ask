@@ -4,10 +4,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.fernandoambrosio.devask.Logica.Aleatorio;
+import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
 
 /**
  * Created by josueChaqui on 13/05/2016.
@@ -58,5 +60,41 @@ public class Categoria extends AppCompatActivity {
         imagen4 = (ImageView)  this.findViewById(R.id.imageView10);
         imagen5 = (ImageView)  this.findViewById(R.id.imageView11);
         hilo.start();
+        imagen1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarCategoria("cultura");
+            }
+        });
+        imagen2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarCategoria("gastronomia");
+            }
+        });
+        imagen3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarCategoria("geografia");
+            }
+        });
+        imagen4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarCategoria("musica");
+            }
+        });
+        imagen5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarCategoria("personajes");
+            }
+        });
+    }
+
+    private void EnviarCategoria(String categoria){
+        InterfazJuego interfazJuego = new InterfazJuego(this);
+        interfazJuego.SeleccionarCategoria(categoria);
+        finish();
     }
 }

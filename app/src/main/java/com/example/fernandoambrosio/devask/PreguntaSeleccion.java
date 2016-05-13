@@ -32,6 +32,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private String[] respuestas;
     private TextView cantidadView;
     private TextView cantidadCorrectas;
+    private int categoria;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,6 +48,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         Bundle bundle = getIntent().getExtras();
         this.respuestaCorrecta= bundle.getString("correcta");
+        categoria = bundle.getInt("idCategoria");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         txtVSeleccion.setText(bundle.getString("pregunta"));
@@ -117,7 +120,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
 
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
-        interfazJuego.seleccionarJuego(this.cantidad, this.correctas);
+        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
         finish();
     }
 }

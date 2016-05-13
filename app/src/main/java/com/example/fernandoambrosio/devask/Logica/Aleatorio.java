@@ -61,7 +61,7 @@ public class Aleatorio {
     }
     public int numero(int num){
         while(true){
-            int n = ran.nextInt(num+1);
+            int n = ran.nextInt(num);
                 return n;
             }
         }
