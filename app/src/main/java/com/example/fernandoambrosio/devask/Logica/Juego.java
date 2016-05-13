@@ -55,6 +55,11 @@ public class Juego {
         int idCategoria= acceso.seleccionarIdCategoria(categoria);
         return idCategoria;
     }
+    public String seleccionarNombreCategoria(int idCategoria, int Correctas){
+        String nombre = acceso.seleccionarNombreCategoria(idCategoria);
+        return "ha obtenido "+String.valueOf(idCategoria)+" de la "+nombre+" de Guatemala";
+
+    }
     public int[] seleccionarLogros(){
         int[] retorno = new int[3];
         int[] cantidades= acceso.CantidadPreguntas();
@@ -63,6 +68,8 @@ public class Juego {
         retorno[2]=cantidades[1]-cantidades[0];
         return retorno;
     }
+
+
     private String SeleccionarPregunta(int id){
         PreguntaDirectaTipo preg=acceso.getPreguntaTipo(id);
         return preg.getContexto();

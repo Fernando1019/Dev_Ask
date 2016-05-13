@@ -105,7 +105,6 @@ public class PreguntaFv extends AppCompatActivity {
         }
         else{
             Juego juego = new Juego(this);
-            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
             Intent intent = new Intent(this,RankingActivity.class);
             startActivity(intent);
             finish();

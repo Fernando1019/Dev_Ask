@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.example.fernandoambrosio.devask.Categoria;
 import com.example.fernandoambrosio.devask.PreguntaFv;
 import com.example.fernandoambrosio.devask.PreguntaSeleccion;
+import com.example.fernandoambrosio.devask.RankingActivity;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
@@ -60,5 +61,13 @@ public class InterfazJuego {
         Juego juego = new Juego(contexto);
         int idCategoria = juego.seleccionarIdCategoria(categoria);
         this.seleccionarJuego(0,0,idCategoria);
+    }
+    public void registrar(int correctas, int IdCategoria){
+        Juego juego = new Juego(contexto);
+        Intent intent = new Intent(contexto,RankingActivity.class);
+        String texto =juego.seleccionarNombreCategoria( IdCategoria, correctas);
+        texto= texto+"\n desea Guardar o compartir en redes sociales";
+        intent.putExtra("texto",texto);
+        contexto.startActivity(intent);
     }
 }

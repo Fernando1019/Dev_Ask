@@ -28,10 +28,10 @@ public class RankingActivity extends AppCompatActivity {
         cantidadPreg= (TextView) this.findViewById(R.id.txTotales);
         aceptar=(Button) this.findViewById(R.id.btAceptarRanking);
         Juego juego = new Juego(this);
-        int[] cantidades = juego.seleccionarLogros();
-        correctas.setText(String.valueOf(cantidades[0]));
-        incorrectas.setText(String.valueOf(cantidades[2]));
-        cantidadPreg.setText(String.valueOf(cantidades[1]));
+        //int[] cantidades = juego.seleccionarLogros();
+        correctas.setText("");
+        incorrectas.setText("");
+        cantidadPreg.setText("");
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -126,4 +126,18 @@ public class AccesoJuego {
         }
         return idCategoria;
     }
+    public String seleccionarNombreCategoria(int id){
+        String nombreCategoria= "";
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String consulta = "SELECT nombre FROM Categoria WHERE idCategoria = "+String.valueOf(id);
+        System.out.println(consulta);
+        Cursor cursor = db.rawQuery(consulta,null);
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                nombreCategoria=cursor.getString(cursor.getColumnIndex("nombre"));
+                cursor.close();
+            } while (cursor.moveToNext());
+        }
+        return nombreCategoria;
+    }
 }
