@@ -43,7 +43,7 @@ public class EntradaActivity extends  AppCompatActivity {
         if (a.compareTo("n")==0){
             escribirArchivo();
             // Cuando pasen los 5 segundos, pasamos a la actividad principal de la aplicación
-            Intent intent = new Intent(EntradaActivity.this, Slide.class);
+            Intent intent = new Intent(EntradaActivity.this, Menu.class);
             startActivity(intent);
         }
         else {
