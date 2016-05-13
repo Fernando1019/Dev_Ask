@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
 import com.example.fernandoambrosio.devask.Logica.Juego;
 import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
 import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
@@ -26,16 +27,11 @@ public class Menu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        System.out.print("Menu");
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.menu);
-
-        acceso = new AccesoUsuario(this);
-        TextView textView2 = (TextView) findViewById(R.id.textView2);
-        String nombre = acceso.getUsuario();
-        String textoAnterior = (String) textView2.getText();
-        textView2.setText(textoAnterior + " " + nombre);
+        System.out.print("Meni");
 
 
         Button boton_puntos = (Button) findViewById(R.id.buttonPuntos);
@@ -65,38 +61,8 @@ public class Menu extends AppCompatActivity {
         });
     }
     public  void jugar() {
-        Juego juego = new Juego(this);
-        Random random = new Random();
-        int numero = random.nextInt(3) + 1;
-        Intent intent = null;
-        if (numero == 1) {
-            PreguntaVF vf = juego.crearPreguntaVf();
-            intent = new Intent(Menu.this, PreguntaFv.class);
-            intent.putExtra("pregunta",vf.getContexto());
-            intent.putExtra("respuesta",vf.getRespuesta());
-        }
-        if (numero == 2) {
-            PreguntaDirectaTipo directa = juego.crearPreguntaDirecta();
-             intent = new Intent(Menu.this, PreguntaDirecta.class);
-            intent.putExtra("pregunta",directa.getContexto());
-            intent.putExtra("respuesta",directa.getRespuesta());
-        }
-        if (numero == 3) {
-            PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple();
-            intent = new Intent(Menu.this, PreguntaSeleccion.class);
-            String[] respuestas = multiple.getRespuesta();
-            intent.putExtra("pregunta",multiple.getContexto());
-            intent.putExtra("respuesta1",respuestas[0]);
-            intent.putExtra("respuesta2",respuestas[1]);
-            intent.putExtra("respuesta3",respuestas[2]);
-            System.out.println(multiple.getCorrecta());
-            intent.putExtra("correcta",String.valueOf(multiple.getCorrecta()));
-
-        }
-
-        intent.putExtra("cantidad",String.valueOf(1));
-        intent.putExtra("correctas",String.valueOf(0));
-        startActivity(intent);
+        InterfazJuego interfazJuego = new InterfazJuego(this);
+        interfazJuego.abrirCategorias();
         finish();
     }
 }

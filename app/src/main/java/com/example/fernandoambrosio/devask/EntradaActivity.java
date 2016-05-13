@@ -19,7 +19,7 @@ import java.io.OutputStreamWriter;
 public class EntradaActivity extends  AppCompatActivity {
 
     // Duración en milisegundos que se mostrará el splash
-    private final int DURACION_SPLASH = 5000; // 5 segundos
+    private final int DURACION_SPLASH = 4000; // 5 segundos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,60 +31,13 @@ public class EntradaActivity extends  AppCompatActivity {
 
         new Handler().postDelayed(new Runnable(){
             public void run(){
-               pasarDeActividad();
+                Intent intent = new Intent(EntradaActivity.this, Menu.class);
+                startActivity(intent);
                 finish();
             };
         }, DURACION_SPLASH);
 
     }
 
-    private void pasarDeActividad(){
-        String a = this.leerArchivo();
-        if (a.compareTo("n")==0){
-            escribirArchivo();
-            // Cuando pasen los 5 segundos, pasamos a la actividad principal de la aplicación
-            Intent intent = new Intent(EntradaActivity.this, Menu.class);
-            startActivity(intent);
-        }
-        else {
-            // Cuando pasen los 5 segundos, pasamos a la actividad principal de la aplicación
-            Intent intent = new Intent(EntradaActivity.this, Menu.class);
-            startActivity(intent);
-        }
-
-    }
-    private void escribirArchivo(){
-        try
-        {
-            OutputStreamWriter fout=
-                    new OutputStreamWriter(
-                            openFileOutput("existencia.txt", Context.MODE_PRIVATE));
-
-            fout.write("True");
-            fout.close();
-        }
-        catch (Exception ex)
-        {
-            Log.e("Ficheros", "Error al escribir fichero a memoria interna");
-        }
-    }
-    private String leerArchivo(){
-        String texto="";
-        try
-        {
-            BufferedReader fin =
-                    new BufferedReader(
-                            new InputStreamReader(
-                                    openFileInput("existencia.txt")));
-
-            texto = fin.readLine();
-            fin.close();
-        }
-        catch (Exception ex)
-        {
-            return("n");
-        }
-        return texto;
-    }
 
 }
