@@ -65,5 +65,13 @@ public class Aleatorio {
                 return n;
             }
         }
+    public int numeroMenosCero(int num){
+        while(true){
+            int n = ran.nextInt(num);
+            if(n!=0){
+                return n;
+            }
+        }
+    }
     }
 

@@ -3,6 +3,7 @@ package com.example.fernandoambrosio.devask.Logica;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.fernandoambrosio.devask.Categoria;
 import com.example.fernandoambrosio.devask.PreguntaFv;
 import com.example.fernandoambrosio.devask.PreguntaSeleccion;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
@@ -48,6 +49,10 @@ public class InterfazJuego {
         }
         intent.putExtra("cantidad",String.valueOf(cantidad));
         intent.putExtra("correctas",String.valueOf(correctas));
+        contexto.startActivity(intent);
+    }
+    public void abrirCategorias(){
+        Intent intent =new Intent(contexto, Categoria.class);
         contexto.startActivity(intent);
     }
 }

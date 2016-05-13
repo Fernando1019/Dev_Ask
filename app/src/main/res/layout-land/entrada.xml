@@ -15,7 +15,7 @@
             android:layout_width="276dp"
             android:layout_height="270dp"
             android:id="@+id/imageButton"
-            android:background="@drawable/logo"
+            android:background="@drawable/logo_full"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="140dp" />
     </LinearLayout>
