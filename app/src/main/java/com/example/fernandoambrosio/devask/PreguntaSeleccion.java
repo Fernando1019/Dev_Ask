@@ -22,18 +22,25 @@ import java.util.Random;
  * Created by Fernando Ambrosio on 24/04/2016.
  */
 public class PreguntaSeleccion  extends AppCompatActivity {
-    private TextView txtVSeleccion;
-    private Button respuesta1;
-    private Button respuesta2;
-    private Button respuesta3;
+    private Button respuesta1, respuesta2,respuesta3;
     private String respuestaCorrecta;
     private String resp1, resp2, resp3;
-    private int cantidad,correctas;
+    private int cantidad,correctas, categoria;
     private String[] respuestas;
-    private TextView cantidadView;
-    private TextView cantidadCorrectas;
-    private int categoria;
-
+    private TextView cantidadView, cantidadCorrectas, txtCronoSeleccion, txtVSeleccion;
+    private Thread cronometro = new Thread(new Runnable() {
+        int n=0;
+        @Override
+        public void run() {
+            txtCronoSeleccion.setText(String.valueOf(n));
+            try {
+                Thread.currentThread().sleep( 1000 );
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            n++;
+        }
+    });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,6 +53,9 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta3 = (Button) this.findViewById(R.id.buttonSelec3);
         cantidadView= (TextView) this.findViewById(R.id.txCantidadSel);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
+        txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
+
+
         Bundle bundle = getIntent().getExtras();
         this.respuestaCorrecta= bundle.getString("correcta");
         categoria = bundle.getInt("idCategoria");
@@ -68,6 +78,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta1.setText(resp1);
         respuesta2.setText(resp2);
         respuesta3.setText(resp3);
+        cronometro.start();
         respuesta1.setOnClickListener(  new View.OnClickListener() {
 
             @Override

@@ -22,7 +22,7 @@ import java.util.Random;
  * Created by Fernando Ambrosio on 23/04/2016.
  */
 public class PreguntaFv extends AppCompatActivity {
-    private TextView preguntaFV;
+    private TextView preguntaFV, txtCronoFv;
     private Button botonFalso;
     private  Button botonVerdadero;
     private TextView cantidadView;
@@ -31,7 +31,19 @@ public class PreguntaFv extends AppCompatActivity {
     private TextView cantidadCorrectas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        Thread cronometro = new Thread(new Runnable() {
+            int n=0;
+            @Override
+            public void run() {
+                txtCronoFv.setText(String.valueOf(n));
+                try {
+                    Thread.currentThread().sleep( 1000 );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                n++;
+            }
+        });
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.preguntafv);
@@ -39,6 +51,7 @@ public class PreguntaFv extends AppCompatActivity {
         botonFalso = (Button) this.findViewById(R.id.buttonF);
         botonVerdadero = (Button) this.findViewById(R.id.buttonV);
         cantidadView= (TextView) this.findViewById(R.id.txCantidadFv);
+        txtCronoFv= (TextView) this.findViewById(R.id.txtCronoFV);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
         Bundle bundle = getIntent().getExtras();
         categoria = bundle.getInt("idCategoria");
@@ -49,7 +62,7 @@ public class PreguntaFv extends AppCompatActivity {
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));
-
+        cronometro.start();
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
