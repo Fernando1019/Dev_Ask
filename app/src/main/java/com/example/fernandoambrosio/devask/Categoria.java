@@ -63,25 +63,25 @@ public class Categoria extends AppCompatActivity {
         imagen1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EnviarCategoria("cultura");
+                EnviarCategoria("Tradiciones");
             }
         });
         imagen2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EnviarCategoria("gastronomia");
+                EnviarCategoria("Gastronomia");
             }
         });
         imagen3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EnviarCategoria("geografia");
+                EnviarCategoria("Geografia");
             }
         });
         imagen4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EnviarCategoria("musica");
+                EnviarCategoria("Musica");
             }
         });
         imagen5.setOnClickListener(new View.OnClickListener() {
