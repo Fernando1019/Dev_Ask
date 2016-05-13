@@ -1,6 +1,8 @@
 package com.example.fernandoambrosio.devask;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
 import com.example.fernandoambrosio.devask.Logica.Juego;
+import com.example.fernandoambrosio.devask.Logica.Musica;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
@@ -22,6 +25,8 @@ import java.util.Random;
  * Created by Fernando Ambrosio on 24/04/2016.
  */
 public class PreguntaSeleccion  extends AppCompatActivity {
+    private Context contexto;
+    private  Musica musica;
     private Button respuesta1, respuesta2,respuesta3;
     private String respuestaCorrecta;
     private String resp1, resp2, resp3;
@@ -54,7 +59,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         cantidadView= (TextView) this.findViewById(R.id.txCantidadSel);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
-
+         musica = new Musica();
 
         Bundle bundle = getIntent().getExtras();
         this.respuestaCorrecta= bundle.getString("correcta");
@@ -79,16 +84,19 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta2.setText(resp2);
         respuesta3.setText(resp3);
         cronometro.start();
+        contexto= this;
         respuesta1.setOnClickListener(  new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                musica.reproducirSeleccion(contexto);
                 verificar(String.valueOf(respuesta1.getText()));
                 }});
 
         respuesta2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                musica.reproducirSeleccion(contexto);
                 verificar(String.valueOf(respuesta2.getText()));
             }
         });
@@ -96,23 +104,25 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                musica.reproducirSeleccion(contexto);
                 verificar(String.valueOf(respuesta3.getText()));
             }
         });
         }
 
-
-    public void verificar(String respuesta){
+    private void verificar(String respuesta){
         if (respuesta.compareTo(this.respuestas[Integer.valueOf(this.respuestaCorrecta)])==0){
             correctas++;
             Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            musica.reproducirCorrecto(contexto);
             toast.show();
         }
         else
         {
             Toast toast = Toast.makeText(this,"incorrecto",Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            musica.reproducirError(contexto);
             toast.show();
         }
         if(cantidad<10){

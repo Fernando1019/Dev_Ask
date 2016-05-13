@@ -1,5 +1,6 @@
 package com.example.fernandoambrosio.devask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
 import com.example.fernandoambrosio.devask.Logica.Juego;
+import com.example.fernandoambrosio.devask.Logica.Musica;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
@@ -22,6 +24,8 @@ import java.util.Random;
  * Created by Fernando Ambrosio on 23/04/2016.
  */
 public class PreguntaFv extends AppCompatActivity {
+    private Context contexto;
+    private Musica musica;
     private TextView preguntaFV, txtCronoFv;
     private Button botonFalso;
     private  Button botonVerdadero;
@@ -66,6 +70,7 @@ public class PreguntaFv extends AppCompatActivity {
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                musica.reproducirSeleccion(contexto);
                 verificarPregunta("Falso");
             }
         });
@@ -73,9 +78,11 @@ public class PreguntaFv extends AppCompatActivity {
         botonVerdadero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                musica.reproducirSeleccion(contexto);
                 verificarPregunta("Verdadero");
             }
         });
+        contexto= this;
     }
 
     public void verificarPregunta(String respuestaSeleccionada){
@@ -83,12 +90,14 @@ public class PreguntaFv extends AppCompatActivity {
         if (this.respuesta.compareTo(respuestaSeleccionada)==0){
             correctas++;
             Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);
+            musica.reproducirCorrecto(contexto);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
         }
         else{
             Toast toast = Toast.makeText(this,"incorrecto",Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            musica.reproducirError(contexto);
             toast.show();
         }
         if(cantidad<10){
