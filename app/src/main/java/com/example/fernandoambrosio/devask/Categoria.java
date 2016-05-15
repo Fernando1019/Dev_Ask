@@ -59,7 +59,7 @@ public class Categoria extends AppCompatActivity {
         imagen3 = (ImageView)  this.findViewById(R.id.imageView9);
         imagen4 = (ImageView)  this.findViewById(R.id.imageView10);
         imagen5 = (ImageView)  this.findViewById(R.id.imageView11);
-        hilo.start();
+        //hilo.start();
         imagen1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
