@@ -21,10 +21,10 @@ public class AccesoJuego {
 
     public PreguntaDirectaTipo getPreguntaTipo(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta = "SELECT contexto,  directa.Respuesta AS resp  FROM Preguntas INNER JOIN" +
-                "(SELECT idPregunta AS id , Respuesta  FROM RespuestaDirecta WHERE idRespuestaDirecta = "+
+        String consulta = "SELECT contexto,  directa.Respuesta AS resp  FROM Pregunta INNER JOIN" +
+                "(SELECT Pregunta_idPregunta AS id , Respuesta  FROM RespuestaDirecta WHERE idRespuestaDirecta = "+
                         String.valueOf(id)+") AS directa ON directa.id  = " +
-                        "Preguntas.idPregunta;";
+                        "Pregunta.idPregunta;";
         System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaDirectaTipo preguntaDirectaTipo = new PreguntaDirectaTipo();
@@ -60,8 +60,8 @@ public class AccesoJuego {
     public PreguntaVF getPregutaVF(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="SELECT contexto,  directa.respuesta AS resp  FROM Pregunta INNER JOIN(SELECT " +
-                "idPregunta, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
-                ") AS directa ON directa.idPregunta = Preguntas.idPregunta;";
+                "Pregunta_idPregunta as id, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
+                ") AS directa ON directa.id = Pregunta.idPregunta;";
         System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaVF preguntavf = new PreguntaVF();

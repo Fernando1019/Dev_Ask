@@ -30,6 +30,7 @@ public class InterfazJuego {
         int numero = aleatorio.numero(2+1);
 
         if (numero == 1) {
+            System.out.println("1");
             PreguntaVF vf = juego.crearPreguntaVf(idCategoria);
             intent = new Intent(contexto, PreguntaFv.class);
             intent.putExtra("pregunta",vf.getContexto());
@@ -37,6 +38,7 @@ public class InterfazJuego {
         }
         //preguntaMultiple
         if (numero == 2) {
+            System.out.println("2");
             PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple(idCategoria);
             intent = new Intent(contexto, PreguntaSeleccion.class);
             String[] respuestas = multiple.getRespuesta();

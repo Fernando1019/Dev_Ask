@@ -57,6 +57,7 @@ public class PreguntaFv extends AppCompatActivity {
         cantidadView= (TextView) this.findViewById(R.id.txCantidadFv);
         txtCronoFv= (TextView) this.findViewById(R.id.txtCronoFV);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
+        musica = new Musica();
         Bundle bundle = getIntent().getExtras();
         categoria = bundle.getInt("idCategoria");
         respuesta= bundle.getString("respuesta");
