@@ -21,19 +21,19 @@ public class Juego {
         aleatorio = new Aleatorio();
 
     }
-    public PreguntaVF crearPreguntaVf(){
-        int cantidadIds= acceso.cantidadDatosTabla("VF");
-        int numero = aleatorio.numero(cantidadIds);
-        PreguntaVF fv =  acceso.getPregutaVF(numero);
+    public PreguntaVF crearPreguntaVf(int idCategoria){
+        int[] cantidadIds= acceso.cantidadDatosTabla("VF",idCategoria);
+        int numero = aleatorio.numero(cantidadIds.length);
+        PreguntaVF fv =  acceso.getPregutaVF(cantidadIds[numero]);
         System.out.println(fv.getRespuesta());
         return fv;
     }
-    public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(){
+    public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(int idCategoria){
         PreguntaOpcionMultiple multiple = new PreguntaOpcionMultiple();
-        int cantidadIds= acceso.cantidadDatosTabla("Directa");
-        int[] idPreguntas = aleatorio.tresNumerosAleatorios(cantidadIds);
+        int[] cantidadIds= acceso.cantidadDatosTabla("Directa", idCategoria);
+        int[] idPreguntas = aleatorio.tresNumerosAleatorios(cantidadIds.length);
         int idCorrecta =aleatorio.numero();
-        multiple.setContexto(SeleccionarPregunta(idPreguntas[idCorrecta]));
+        multiple.setContexto(SeleccionarPregunta(cantidadIds[idPreguntas[idCorrecta]]));
         multiple.setCorrecta(idCorrecta);
         multiple.setRespuesta(respuestas(idPreguntas));
         return multiple;
@@ -50,6 +50,16 @@ public class Juego {
             acceso.actualizarCantidades(nuevaCantidadCorrectas, nuevaCantidadPreguntas);
         }
     }
+
+    public int seleccionarIdCategoria(String categoria){
+        int idCategoria= acceso.seleccionarIdCategoria(categoria);
+        return idCategoria;
+    }
+    public String seleccionarNombreCategoria(int idCategoria, int Correctas){
+        String nombre = acceso.seleccionarNombreCategoria(idCategoria);
+        return "ha obtenido "+String.valueOf(idCategoria)+" de la "+nombre+" de Guatemala";
+
+    }
     public int[] seleccionarLogros(){
         int[] retorno = new int[3];
         int[] cantidades= acceso.CantidadPreguntas();
@@ -58,6 +68,8 @@ public class Juego {
         retorno[2]=cantidades[1]-cantidades[0];
         return retorno;
     }
+
+
     private String SeleccionarPregunta(int id){
         PreguntaDirectaTipo preg=acceso.getPreguntaTipo(id);
         return preg.getContexto();
