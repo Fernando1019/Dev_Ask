@@ -27,7 +27,7 @@ public class InterfazJuego {
         Juego juego = new Juego(contexto);
         Aleatorio aleatorio = new Aleatorio();
         Intent intent = null;
-        int numero = aleatorio.numero(2);
+        int numero = aleatorio.numero(2+1);
 
         if (numero == 1) {
             PreguntaVF vf = juego.crearPreguntaVf(idCategoria);

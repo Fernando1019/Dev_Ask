@@ -42,7 +42,7 @@ public class AccesoJuego {
 
     public int[] cantidadDatosTabla(String tabla, int idCategoria){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="SELECT idRespuesta"+tabla+" AS ids  FROM Respuesta"+tabla+""+String.valueOf(idCategoria);
+        String consulta ="SELECT idRespuesta"+tabla+" AS ids  FROM Respuesta"+tabla+" WHERE categoria_idCategoria ="+String.valueOf(idCategoria);
         System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int ids[]=new int[cursor.getCount()];
@@ -59,7 +59,7 @@ public class AccesoJuego {
     }
     public PreguntaVF getPregutaVF(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="SELECT contexto,  directa.respuesta AS resp  FROM Preguntas INNER JOIN(SELECT " +
+        String consulta ="SELECT contexto,  directa.respuesta AS resp  FROM Pregunta INNER JOIN(SELECT " +
                 "idPregunta, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
                 ") AS directa ON directa.idPregunta = Preguntas.idPregunta;";
         System.out.println(consulta);
