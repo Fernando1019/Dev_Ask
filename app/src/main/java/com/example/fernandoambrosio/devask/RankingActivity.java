@@ -17,7 +17,7 @@ public class RankingActivity extends AppCompatActivity {
     private TextView cantidadPreg;
     private TextView correctas;
     private TextView incorrectas;
-    private Button aceptar;
+    private Button aceptar, compartir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,7 @@ public class RankingActivity extends AppCompatActivity {
         incorrectas= (TextView) this.findViewById(R.id.txIncorrectas);
         cantidadPreg= (TextView) this.findViewById(R.id.txTotales);
         aceptar=(Button) this.findViewById(R.id.btAceptarRanking);
+        compartir=(Button) this.findViewById(R.id.btCompartir);
         Juego juego = new Juego(this);
         //int[] cantidades = juego.seleccionarLogros();
         correctas.setText("");
@@ -38,6 +39,15 @@ public class RankingActivity extends AppCompatActivity {
                 Intent intent = new Intent(RankingActivity.this, Menu.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        compartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, "En la Categoria de (DevASk)");
+                startActivity(Intent.createChooser(intent, "Share with"));
             }
         });
     }
