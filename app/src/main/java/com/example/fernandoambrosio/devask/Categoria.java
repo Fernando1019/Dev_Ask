@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 
 import com.example.fernandoambrosio.devask.Logica.Aleatorio;
@@ -20,35 +23,7 @@ public class Categoria extends AppCompatActivity {
     private ImageView imagen3;
     private ImageView imagen4;
     private ImageView imagen5;
-    private Thread hilo = new  Thread(new Runnable() {
-        Aleatorio aleatorio  = new Aleatorio();
-        @Override
-        public void run() {
-            try {
-                Thread.currentThread().sleep( 1000 );
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            int n= aleatorio.numeroMenosCero(5);
-            switch (n){
-                case 1:
-                        imagen1.setImageResource(R.drawable.culturaos);
-                        break;
-                case 2:
-                    imagen2.setImageResource(R.drawable.gastronomiaos);
-                    break;
-                case 3:
-                    imagen3.setImageResource(R.drawable.geografiaos);
-                    break;
-                case 4:
-                    imagen4.setImageResource(R.drawable.musicaos);
-                    break;
-                case 5:
-                    imagen5.setImageResource(R.drawable.personajesos);
-                    break;
-            }
-        }
-    });
+    private ImageSwitcher imageSwitcher;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +34,14 @@ public class Categoria extends AppCompatActivity {
         imagen3 = (ImageView)  this.findViewById(R.id.imageView9);
         imagen4 = (ImageView)  this.findViewById(R.id.imageView10);
         imagen5 = (ImageView)  this.findViewById(R.id.imageView11);
-        //hilo.start();
+
+        //Transiciones
+        Animation entrada = AnimationUtils.loadAnimation(this, R.anim.entrada);
+        Animation salida = AnimationUtils.loadAnimation(this, R.anim.salida);
+        imageSwitcher.setInAnimation(entrada);
+        imageSwitcher.setOutAnimation(salida);
+
+        //Seleccion de Imagenes para enviar a cada Categoria
         imagen1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
