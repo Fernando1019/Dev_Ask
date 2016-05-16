@@ -27,7 +27,7 @@ public class InterfazJuego {
         Juego juego = new Juego(contexto);
         Aleatorio aleatorio = new Aleatorio();
         Intent intent = null;
-        int numero = aleatorio.numero(2+1);
+        int numero = aleatorio.numeroMenosCero(3);
 
         if (numero == 1) {
             System.out.println("1");
