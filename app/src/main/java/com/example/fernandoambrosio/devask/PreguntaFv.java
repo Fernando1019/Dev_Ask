@@ -3,6 +3,7 @@ package com.example.fernandoambrosio.devask;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -35,19 +36,7 @@ public class PreguntaFv extends AppCompatActivity {
     private TextView cantidadCorrectas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Thread cronometro = new Thread(new Runnable() {
-            int n=0;
-            @Override
-            public void run() {
-                txtCronoFv.setText(String.valueOf(n));
-                try {
-                    Thread.currentThread().sleep( 1000 );
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                n++;
-            }
-        });
+
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.preguntafv);
@@ -64,10 +53,21 @@ public class PreguntaFv extends AppCompatActivity {
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         correctas= Integer.valueOf(bundle.getString("correctas"));
 
+
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));
-        cronometro.start();
+        new CountDownTimer(20000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                txtCronoFv.setText(String.valueOf(millisUntilFinished / 1000) );
+            }
+
+            public void onFinish() {
+                musica.reproducirError(contexto);
+                mandarNuevoJuego();
+            }
+        }.start();
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +101,10 @@ public class PreguntaFv extends AppCompatActivity {
             musica.reproducirError(contexto);
             toast.show();
         }
+       this.mandarNuevoJuego();
+
+    }
+    private void mandarNuevoJuego(){
         if(cantidad<10){
             jugar();
         }
@@ -110,7 +114,6 @@ public class PreguntaFv extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);

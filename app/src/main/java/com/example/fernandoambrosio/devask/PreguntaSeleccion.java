@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -60,7 +61,17 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
          musica = new Musica();
+        new CountDownTimer(20000, 1000) {
 
+            public void onTick(long millisUntilFinished) {
+                txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
+            }
+
+            public void onFinish() {
+                musica.reproducirError(contexto);
+                mandarNuevoJuego();
+            }
+        }.start();
         Bundle bundle = getIntent().getExtras();
         this.respuestaCorrecta= bundle.getString("correcta");
         categoria = bundle.getInt("idCategoria");
@@ -125,19 +136,20 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             musica.reproducirError(contexto);
             toast.show();
         }
+       this.mandarNuevoJuego();
+
+    }
+    private void mandarNuevoJuego(){
         if(cantidad<10){
             jugar();
         }
         else{
             Juego juego = new Juego(this);
-            juego.actualizarLogro(10, Integer.valueOf(this.correctas));
             Intent intent = new Intent(this,RankingActivity.class);
             startActivity(intent);
             finish();
         }
-
     }
-
 
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
