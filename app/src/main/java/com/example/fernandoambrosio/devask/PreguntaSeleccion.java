@@ -34,19 +34,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private int cantidad,correctas, categoria;
     private String[] respuestas;
     private TextView cantidadView, cantidadCorrectas, txtCronoSeleccion, txtVSeleccion;
-    private Thread cronometro = new Thread(new Runnable() {
-        int n=0;
-        @Override
-        public void run() {
-            txtCronoSeleccion.setText(String.valueOf(n));
-            try {
-                Thread.currentThread().sleep( 1000 );
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            n++;
-        }
-    });
+    private CountDownTimer crono;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,7 +49,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
          musica = new Musica();
-        new CountDownTimer(20000, 1000) {
+        crono =  new CountDownTimer(20000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
@@ -94,7 +82,6 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta1.setText(resp1);
         respuesta2.setText(resp2);
         respuesta3.setText(resp3);
-        cronometro.start();
         contexto= this;
         respuesta1.setOnClickListener(  new View.OnClickListener() {
 
@@ -122,6 +109,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         }
 
     private void verificar(String respuesta){
+        crono.cancel();
         if (respuesta.compareTo(this.respuestas[Integer.valueOf(this.respuestaCorrecta)])==0){
             correctas++;
             Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);

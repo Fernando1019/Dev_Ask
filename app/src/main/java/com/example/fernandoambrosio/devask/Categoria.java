@@ -26,7 +26,7 @@ import java.util.TimerTask;
 public class Categoria extends AppCompatActivity {
     private int[] galeria = {R.drawable.cultura, R.drawable.gastronomia, R.drawable.geografia,
             R.drawable.musica, R.drawable.personajes,};
-    private String[] categorias={"Tradiciones","Gastronomia","Geografia","Musica","personajes"};
+    private String[] categorias={"Tradiciones","Gastronomia","Geografia","Musica","Personajes"};
     private static final Integer DURACION = 200;
     private ImageView imagen1;
     private ImageView imagen2;

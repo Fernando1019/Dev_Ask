@@ -34,6 +34,7 @@ public class PreguntaFv extends AppCompatActivity {
     private String respuesta;
     private int cantidad,correctas, categoria;
     private TextView cantidadCorrectas;
+    private CountDownTimer crono;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,7 +58,7 @@ public class PreguntaFv extends AppCompatActivity {
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));
-        new CountDownTimer(20000, 1000) {
+        crono = new CountDownTimer(20000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtCronoFv.setText(String.valueOf(millisUntilFinished / 1000) );
@@ -87,7 +88,7 @@ public class PreguntaFv extends AppCompatActivity {
     }
 
     public void verificarPregunta(String respuestaSeleccionada){
-
+        crono.cancel();
         if (this.respuesta.compareTo(respuestaSeleccionada)==0){
             correctas++;
             Toast toast = Toast.makeText(this,"correcto",Toast.LENGTH_SHORT);

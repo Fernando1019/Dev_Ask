@@ -11,10 +11,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
         <activity
             android:name=".EntradaActivity"
             android:screenOrientation="portrait">
@@ -46,10 +42,6 @@
             android:name=".Categoria"
             android:screenOrientation="portrait" />
 
-        <service
-            android:name=".Logica.Cronometro"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>
