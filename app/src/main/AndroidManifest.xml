@@ -41,7 +41,9 @@
         <activity
             android:name=".Categoria"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".Historial"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

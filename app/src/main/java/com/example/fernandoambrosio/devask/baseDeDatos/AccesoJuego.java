@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.fernandoambrosio.devask.tipos.Logro;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
+
+import java.util.ArrayList;
 
 
 /**
@@ -102,16 +105,58 @@ public class AccesoJuego {
         db.rawQuery(consulta,null);
         db.close();
     }
-    public void insertCantidades(int correctas, int cantidad){
+    private int cantidadDeLogros(){
+        int total=0;
+        SQLiteDatabase db  = dbHelper.getWritableDatabase();
+        String consulta ="SELECT count(idLogro) as total FROM logro";
+        System.out.println(consulta);
+        Cursor cursor = db.rawQuery(consulta,null);
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                total=Integer.valueOf(cursor.getString(cursor.getColumnIndex("total")));
+                cursor.close();
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return total;
+    }
+    private int cantidadDeJugadores(){
+        int total=0;
+        SQLiteDatabase db  = dbHelper.getWritableDatabase();
+        String consulta ="SELECT count(idjugador) as total FROM jugador";
+        System.out.println(consulta);
+        Cursor cursor = db.rawQuery(consulta,null);
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                total=Integer.valueOf(cursor.getString(cursor.getColumnIndex("total")));
+                cursor.close();
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return total;
+    }
+    public void insertarJugador(String nombre,int correctas){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("idLogro",1);
+        int idJugador= cantidadDeJugadores()+1;
+        values.put("idjugador",idJugador);
+        values.put("nombre",nombre);
+        long StudentId =db.insert("jugador",null,values);
+        db.close();
+        this.insertCantidades(correctas,idJugador);
+    }
+    public void insertCantidades(int correctas,  int idJugador){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        int logro= cantidadDeLogros()+1;
+        values.put("idLogro",logro);
         values.put("correctas",correctas);
         values.put("totalPregunta",10);
-        values.put("idJugador",1);
-        long StudentId =db.insert("Logro",null,values);
+        values.put("idJugador",idJugador);
+        long StudentId =db.insert("logro",null,values);
         db.close();
     }
+
     public int seleccionarIdCategoria(String categoria){
         int idCategoria=0;
         SQLiteDatabase db  = dbHelper.getWritableDatabase();
@@ -124,6 +169,7 @@ public class AccesoJuego {
                 cursor.close();
             } while (cursor.moveToNext());
         }
+        db.close();
         return idCategoria;
     }
     public String seleccionarNombreCategoria(int id){
@@ -138,6 +184,26 @@ public class AccesoJuego {
                 cursor.close();
             } while (cursor.moveToNext());
         }
+        db.close();
         return nombreCategoria;
     }
+    public ArrayList<Logro> seleccionarLogros(){
+        ArrayList<Logro> logroArrayList = new ArrayList<Logro>();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String consulta = "SELECT nombre, respuestasCorrectas FROM jugador INNER JOIN \n" +
+                "(SELECT * FROM logro) as llogroObtenido ON llogroObtenido.jugador_idjugador = jugador.idjugador";
+        System.out.println(consulta);
+        Cursor cursor = db.rawQuery(consulta,null);
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                String nombre=cursor.getString(cursor.getColumnIndex("nombre"));
+                int respuestasCorrectas=cursor.getInt(cursor.getColumnIndex("respuestasCorrectas"));
+                logroArrayList.add(new Logro(nombre,respuestasCorrectas));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return logroArrayList;
+    }
+
 }

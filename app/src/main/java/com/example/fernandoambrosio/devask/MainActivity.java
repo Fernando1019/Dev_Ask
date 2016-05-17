@@ -1,13 +1,17 @@
 package com.example.fernandoambrosio.devask;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
 import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
 import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
 import com.example.fernandoambrosio.devask.tipos.Usuario;
@@ -15,14 +19,21 @@ import com.example.fernandoambrosio.devask.tipos.Usuario;
 
 public class MainActivity extends AppCompatActivity {
     private AccesoUsuario acceso;
+    private EditText tUsuario;
+    private int idCategoria,correctas;
+    private Context contexto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         acceso = new AccesoUsuario(this);
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.registro);
-
         // Botón de salida (final de la aplicación)
+        Bundle bundle = getIntent().getExtras();
+        idCategoria = bundle.getInt("categoria");
+        correctas = bundle.getInt("correctas");
+        tUsuario =(EditText)findViewById(R.id.tUsuario);
+        contexto= this;
         Button boton_salida = (Button)findViewById(R.id.buttonCancelar);
         boton_salida.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,17 +53,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(v.getId() == R.id.buttonAceptar) {
-
-                    EditText a = (EditText)findViewById(R.id.tUsuario);
-                    String str = a.getText().toString();
-
-                   Intent intent = new Intent(MainActivity.this, Menu.class);
-                    intent.putExtra("nombre", str);
+                    InterfazJuego juego = new InterfazJuego(contexto);
+                    juego.insertarJugador(correctas,tUsuario.getText().toString());
                     finish();
-                    Usuario u = new Usuario();
-                    u.setNombre(str);
-                    acceso.insert(u);
-                    startActivity(intent);
                 }
             }
         });

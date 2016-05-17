@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Jas App</string>
-    <string name="facebook_app_id">1220517867975635</string>
+    <string name="regresar">regresar</string>
+
 </resources>

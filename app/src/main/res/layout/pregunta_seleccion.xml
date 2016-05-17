@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#fbfbfb"
     android:weightSum="1">
     //Cabecera
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,18 +11,37 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="6dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SELECCION"
-            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+            android:textSize="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pausa"
+            android:id="@+id/btPausaSel"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terminar"
+            android:id="@+id/btStopSel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            />
     </android.support.v7.widget.Toolbar>
+
+
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="43dp"
+        android:background="#7C4DFF"
+        android:elevation="4dp"
         android:weightSum="1">
 
         <TextView
@@ -31,9 +50,14 @@
             android:text="New Text"
             android:id="@+id/txtCronoSeleccion"
             android:layout_weight="0.35"
-            android:textColor="@color/abc_input_method_navigation_guard"
+            android:textColor="#ffffff"
             android:textSize="30dp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="11dp"></LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -53,13 +77,17 @@
             android:text="Pregunta?"
             android:id="@+id/txtVSeleccion"
             android:textColor="#000000"
+            android:elevation="6dp"
+            android:background="#ffffff"
+            android:padding="5dp"
+
             android:textSize="16dp"
             android:layout_weight="0.86" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="290dp">
+        android:layout_height="276dp">
 
         <Button
             android:layout_width="250dp"
@@ -68,7 +96,7 @@
             android:id="@+id/buttonSelec1"
             android:layout_gravity="center_horizontal|top"
             android:layout_marginTop="50dp"
-            android:background="#275f78" />
+            android:background="@drawable/bk_boton_plano" />
 
         <Button
             android:layout_width="250dp"
@@ -76,7 +104,7 @@
             android:text="New Button"
             android:id="@+id/buttonSelec2"
             android:layout_gravity="center"
-            android:background="#275f78" />
+            android:background="@drawable/bk_boton_plano"  />
 
         <Button
             android:layout_width="250dp"
@@ -85,7 +113,7 @@
             android:id="@+id/buttonSelec3"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="50dp"
-            android:background="#275f78" />
+            android:background="@drawable/bk_boton_plano" />
     </FrameLayout>
 
     <LinearLayout

@@ -28,25 +28,28 @@ public class PreguntaFv extends AppCompatActivity {
     private Context contexto;
     private Musica musica;
     private TextView preguntaFV, txtCronoFv;
-    private Button botonFalso;
-    private  Button botonVerdadero;
+    private Button botonFalso, botonVerdadero, btPausaFv, btDetenerVf;
     private TextView cantidadView;
     private String respuesta;
     private int cantidad,correctas, categoria;
     private TextView cantidadCorrectas;
     private CountDownTimer crono;
+    private  boolean pausado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.preguntafv);
+        pausado=true;
         preguntaFV = (TextView) this.findViewById(R.id.tvPreguntaFv);
         botonFalso = (Button) this.findViewById(R.id.buttonF);
         botonVerdadero = (Button) this.findViewById(R.id.buttonV);
         cantidadView= (TextView) this.findViewById(R.id.txCantidadFv);
         txtCronoFv= (TextView) this.findViewById(R.id.txtCronoFV);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
+        btDetenerVf = (Button) this.findViewById(R.id.btStopVf);
+        btPausaFv = (Button)this.findViewById(R.id.btPausaVf);
         musica = new Musica();
         Bundle bundle = getIntent().getExtras();
         categoria = bundle.getInt("idCategoria");
@@ -69,6 +72,29 @@ public class PreguntaFv extends AppCompatActivity {
                 mandarNuevoJuego();
             }
         }.start();
+        btPausaFv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pausado) {
+                    crono.start();
+                    pausado=false;
+                }
+                else{
+                    try {
+                        crono.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    pausado=true;
+                }
+            }
+        });
+        btDetenerVf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         botonFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

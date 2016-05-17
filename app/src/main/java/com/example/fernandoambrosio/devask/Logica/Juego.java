@@ -59,9 +59,9 @@ public class Juego {
         int idCategoria= acceso.seleccionarIdCategoria(categoria);
         return idCategoria;
     }
-    public String seleccionarNombreCategoria(int idCategoria, int Correctas){
+    public String seleccionarNombreCategoria(int idCategoria){
         String nombre = acceso.seleccionarNombreCategoria(idCategoria);
-        return "ha obtenido "+String.valueOf(idCategoria)+" de la "+nombre+" de Guatemala";
+        return nombre;
 
     }
     public int[] seleccionarLogros(){
@@ -88,5 +88,14 @@ public class Juego {
             i++;
         }
         return retRespuestas;
+    }
+    public boolean  insertarJugador(String nombre, int correctas ){
+        if (nombre !=""){
+            acceso.insertarJugador(nombre,correctas);
+            return  true;
+        }
+        else{
+            return false;
+        }
     }
 }
