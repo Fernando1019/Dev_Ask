@@ -53,7 +53,7 @@ public class Aleatorio {
     }
     public int numero(){
         while(true){
-            int n = ran.nextInt(4);
+            int n = ran.nextInt(3);
             if(n!=0){
                 return n;
             }

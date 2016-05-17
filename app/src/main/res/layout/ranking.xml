@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RANKING"
+        android:text="Resultado"
         android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
         android:textColor="#000000"
@@ -158,6 +158,13 @@
             android:layout_height="wrap_content"
             android:text="Aceptar"
             android:id="@+id/btAceptarRanking"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Compartir"
+            android:id="@+id/btCompartir"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 

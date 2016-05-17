@@ -31,11 +31,15 @@ public class Juego {
     public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(int idCategoria){
         PreguntaOpcionMultiple multiple = new PreguntaOpcionMultiple();
         int[] cantidadIds= acceso.cantidadDatosTabla("Directa", idCategoria);
+        System.out.println(cantidadIds.length);
         int[] idPreguntas = aleatorio.tresNumerosAleatorios(cantidadIds.length);
+        System.out.println(String.valueOf(idPreguntas[0])+" "+String.valueOf(idPreguntas[1])+" "+String.valueOf(idPreguntas[2]));
         int idCorrecta =aleatorio.numero();
+        System.out.println(String.valueOf(idPreguntas[idCorrecta]));
         multiple.setContexto(SeleccionarPregunta(cantidadIds[idPreguntas[idCorrecta]]));
         multiple.setCorrecta(idCorrecta);
-        multiple.setRespuesta(respuestas(idPreguntas));
+
+        multiple.setRespuesta(respuestas(idPreguntas,cantidadIds));
         return multiple;
     }
 
@@ -75,11 +79,11 @@ public class Juego {
         return preg.getContexto();
 
     }
-    private String[] respuestas(int[] ids){
+    private String[] respuestas(int[] ids, int[]cantidadIds){
         String[] retRespuestas= new String[3];
         int i =0;
         for(int pregunta:ids){
-            PreguntaDirectaTipo preg=acceso.getPreguntaTipo(pregunta);
+            PreguntaDirectaTipo preg=acceso.getPreguntaTipo(cantidadIds[pregunta]);
             retRespuestas[i]=preg.getRespuesta();
             i++;
         }

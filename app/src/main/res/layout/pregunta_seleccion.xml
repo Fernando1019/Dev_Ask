@@ -39,7 +39,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="109dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
 
         <LinearLayout
             android:orientation="vertical"
@@ -48,16 +49,17 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Pregunta?"
             android:id="@+id/txtVSeleccion"
             android:textColor="#000000"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:layout_weight="0.86" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="306dp">
+        android:layout_height="290dp">
 
         <Button
             android:layout_width="250dp"

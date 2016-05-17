@@ -86,5 +86,13 @@
             android:layout_gravity="right|top"
             android:text="gastronomia "
             android:textColor="#000000" />
+
+        <ImageSwitcher
+            android:layout_width="198dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageSwitcher"
+            android:layout_gravity="left|center_vertical" />
+
+
     </FrameLayout>
 </LinearLayout>
