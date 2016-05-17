@@ -10,24 +10,43 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FALSA O VERDADERA"
-            android:textSize="32dp" />
+            android:textSize="20dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pausa"
+            android:id="@+id/btPausaVf"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"
+            android:id="@+id/btStopVf"
+            style="@style/Widget.AppCompat.Button.Borderless"
+          />
     </android.support.v7.widget.Toolbar>
+
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:background="#fbfbfb">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="46dp"
+            android:background="#7C4DFF"
+            android:elevation="4dp"
             android:weightSum="1">
 
             <TextView
@@ -36,7 +55,7 @@
                 android:text="New Text"
                 android:id="@+id/txtCronoFV"
                 android:layout_weight="0.05"
-                android:textColor="@color/abc_input_method_navigation_guard"
+                android:textColor="#ffffff"
                 android:textSize="30dp" />
         </LinearLayout>
 
@@ -58,6 +77,9 @@
                 android:layout_gravity="center_horizontal|top"
                 android:textColor="#000000"
                 android:textSize="16dp"
+                android:background="#ffffff"
+                android:padding="10dp"
+                android:elevation="4dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="0.86" />
 
@@ -71,14 +93,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="116dp">
-
+i
             <Button
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="verdadero"
                 android:id="@+id/buttonV"
                 android:layout_gravity="left|center_vertical"
-                android:background="#275f78"
+                android:background="@drawable/bk_boton_plano"
                 android:textSize="20dp"
                 android:layout_marginLeft="15dp" />
 
@@ -93,7 +115,7 @@
                 android:text="Falso"
                 android:id="@+id/buttonF"
                 android:layout_gravity="right|center_vertical"
-                android:background="#275f78"
+                android:background="@drawable/boton_normal_rojo"
                 android:textSize="20dp"
                 android:layout_marginRight="15dp" />
         </LinearLayout>

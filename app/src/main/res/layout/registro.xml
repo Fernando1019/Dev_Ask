@@ -12,6 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
     <TextView
         android:layout_width="wrap_content"
@@ -75,6 +76,7 @@
             android:layout_gravity="left|center_vertical"
             android:layout_marginTop="70dp"
             android:layout_marginLeft="20dp"
+            android:background="@drawable/bk_boton_plano"
             android:textSize="20dp" />
 
         <Button
@@ -84,6 +86,7 @@
             android:id="@+id/buttonCancelar"
             android:layout_gravity="right|center_vertical"
             android:layout_marginTop="70dp"
+            android:background="@drawable/bk_boton_red"
             android:layout_marginRight="20dp"
             android:textSize="20dp" />
     </FrameLayout>

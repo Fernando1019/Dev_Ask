@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.fernandoambrosio.devask.Categoria;
+import com.example.fernandoambrosio.devask.Historial;
 import com.example.fernandoambrosio.devask.PreguntaFv;
 import com.example.fernandoambrosio.devask.PreguntaSeleccion;
 import com.example.fernandoambrosio.devask.RankingActivity;
@@ -67,9 +68,20 @@ public class InterfazJuego {
     public void registrar(int correctas, int IdCategoria){
         Juego juego = new Juego(contexto);
         Intent intent = new Intent(contexto,RankingActivity.class);
-        String texto =juego.seleccionarNombreCategoria( IdCategoria, correctas);
-        texto= texto+"\n desea Guardar o compartir en redes sociales";
-        intent.putExtra("texto",texto);
+        String categoria =juego.seleccionarNombreCategoria( IdCategoria);
+        intent.putExtra("categoria",categoria);
+        intent.putExtra("correctas",correctas);
+        intent.putExtra("idCategoria",Integer.valueOf(IdCategoria));
         contexto.startActivity(intent);
     }
+    public void insertarJugador(int correctas, String usuario){
+        Juego juego = new Juego(contexto);
+        boolean correcto = juego.insertarJugador(usuario,correctas);
+
+        if (correcto) {
+            Intent intent = new Intent(contexto,Historial.class);
+            contexto.startActivity(intent);
+        }
+    }
+
 }

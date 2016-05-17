@@ -4,16 +4,20 @@ package com.example.fernandoambrosio.devask.tipos;
  * Created by josueChaqui on 25/04/2016.
  */
 public class Logro {
-    private Usuario jugador;
+    private String jugador;
     private int respuestasCorrectas;
     private int respuestasIncorrectas;
-    private int totalRespuestas;
 
-    public Usuario getJugador() {
+    public Logro(String jugador, int respuestasCorrectas) {
+        this.jugador = jugador;
+        this.respuestasCorrectas = respuestasCorrectas;
+    }
+
+    public String getJugador() {
         return jugador;
     }
 
-    public void setJugador(Usuario jugador) {
+    public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
@@ -25,22 +29,10 @@ public class Logro {
         this.respuestasCorrectas = respuestasCorrectas;
     }
 
-    public int getRespuestasIncorrectas() {
-        return respuestasIncorrectas;
-    }
-
-    public void setRespuestasIncorrectas(int respuestasIncorrectas) {
-        this.respuestasIncorrectas = respuestasIncorrectas;
 
 
 
-    }
-
-    public int getTotalRespuestas() {
-        return totalRespuestas;
-    }
-
-    public void setTotalRespuestas(int totalRespuestas) {
-        this.totalRespuestas = totalRespuestas;
+    @Override
+    public String toString(){return jugador+","+"correctas: "+String.valueOf(respuestasCorrectas);
     }
 }

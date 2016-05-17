@@ -28,19 +28,21 @@ import java.util.Random;
 public class PreguntaSeleccion  extends AppCompatActivity {
     private Context contexto;
     private  Musica musica;
-    private Button respuesta1, respuesta2,respuesta3;
+    private Button respuesta1, respuesta2,respuesta3, btPausaFv, btDetenerVf;;
     private String respuestaCorrecta;
     private String resp1, resp2, resp3;
     private int cantidad,correctas, categoria;
     private String[] respuestas;
     private TextView cantidadView, cantidadCorrectas, txtCronoSeleccion, txtVSeleccion;
     private CountDownTimer crono;
+    private  boolean pausado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.pregunta_seleccion);
+        pausado=true;
         txtVSeleccion = (TextView) this.findViewById(R.id.txtVSeleccion);
         respuesta1 = (Button) this.findViewById(R.id.buttonSelec1);
         respuesta2 = (Button) this.findViewById(R.id.buttonSelec2);
@@ -48,6 +50,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         cantidadView= (TextView) this.findViewById(R.id.txCantidadSel);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
+        btDetenerVf = (Button) this.findViewById(R.id.btStopSel);
+        btPausaFv = (Button)this.findViewById(R.id.btPausaSel);
          musica = new Musica();
         crono =  new CountDownTimer(20000, 1000) {
 
@@ -104,6 +108,29 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             public void onClick(View v) {
                 musica.reproducirSeleccion(contexto);
                 verificar(String.valueOf(respuesta3.getText()));
+            }
+        });
+        btPausaFv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pausado) {
+                    crono.start();
+                    pausado=false;
+                }
+                else{
+                    try {
+                        crono.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    pausado=true;
+                }
+            }
+        });
+        btDetenerVf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         }
