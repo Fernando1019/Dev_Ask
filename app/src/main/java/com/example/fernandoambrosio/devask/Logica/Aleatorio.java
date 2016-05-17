@@ -14,7 +14,7 @@ public class Aleatorio {
         System.out.println(String.valueOf(m));
         while(m<3){
             boolean bandera=true;
-            n= ran.nextInt(num+1);
+            n= ran.nextInt(num);
             System.out.println(n);
             for(int b:numeros){
                 if(n==b || n==0){

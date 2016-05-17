@@ -71,6 +71,7 @@ public class InterfazJuego {
         String categoria =juego.seleccionarNombreCategoria( IdCategoria);
         intent.putExtra("categoria",categoria);
         intent.putExtra("correctas",correctas);
+        System.out.println(IdCategoria);
         intent.putExtra("idCategoria",Integer.valueOf(IdCategoria));
         contexto.startActivity(intent);
     }
