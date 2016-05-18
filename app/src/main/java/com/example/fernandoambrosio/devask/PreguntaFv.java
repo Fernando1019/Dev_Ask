@@ -143,6 +143,7 @@ public class PreguntaFv extends AppCompatActivity {
     }
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
+        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
         finish();
     }
 }
