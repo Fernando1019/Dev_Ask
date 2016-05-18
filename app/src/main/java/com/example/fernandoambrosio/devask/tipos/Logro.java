@@ -29,9 +29,6 @@ public class Logro {
         this.respuestasCorrectas = respuestasCorrectas;
     }
 
-
-
-
     @Override
     public String toString(){return jugador+","+"correctas: "+String.valueOf(respuestasCorrectas);
     }

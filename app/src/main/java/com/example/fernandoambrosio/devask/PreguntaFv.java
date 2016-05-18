@@ -56,6 +56,12 @@ public class PreguntaFv extends AppCompatActivity {
         respuesta= bundle.getString("respuesta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         correctas= Integer.valueOf(bundle.getString("correctas"));
+        if(cantidad>10){
+            InterfazJuego interfaz = new InterfazJuego(contexto);
+            interfaz.registrar(this.correctas,this.categoria);
+            overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+            finish();
+        }
 
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
@@ -91,7 +97,11 @@ public class PreguntaFv extends AppCompatActivity {
         btDetenerVf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                crono.cancel();
+                InterfazJuego juego = new InterfazJuego(contexto);
+                juego.cancelar();
+                overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+                finish();
             }
         });
         botonFalso.setOnClickListener(new View.OnClickListener() {
@@ -132,8 +142,6 @@ public class PreguntaFv extends AppCompatActivity {
     }
     private void mandarNuevoJuego(){
         if(cantidad<10){
-            System.out.println("jueoo");
-            System.out.println(cantidad);
             jugar();
             overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             finish();
@@ -142,6 +150,7 @@ public class PreguntaFv extends AppCompatActivity {
             InterfazJuego interfaz = new InterfazJuego(contexto);
             interfaz.registrar(this.correctas,this.categoria);
             overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+            finish();
         }
     }
     public  void jugar() {

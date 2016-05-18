@@ -2,29 +2,22 @@ package com.example.fernandoambrosio.devask;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
-import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
-import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
-import com.example.fernandoambrosio.devask.tipos.Usuario;
 
 
 public class MainActivity extends AppCompatActivity {
-    private AccesoUsuario acceso;
     private EditText tUsuario;
     private int idCategoria,correctas;
     private Context contexto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        acceso = new AccesoUsuario(this);
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.registro);
@@ -34,16 +27,13 @@ public class MainActivity extends AppCompatActivity {
         correctas = bundle.getInt("correctas");
         tUsuario =(EditText)findViewById(R.id.tUsuario);
         contexto= this;
-        Button boton_salida = (Button)findViewById(R.id.buttonCancelar);
-        boton_salida.setOnClickListener(new View.OnClickListener() {
+        Button cancelar = (Button)findViewById(R.id.buttonCancelar);
+        cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(contexto,Historial.class);
+                overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
                 finish();
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-
             }
         });
 
@@ -55,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 if(v.getId() == R.id.buttonAceptar) {
                     InterfazJuego juego = new InterfazJuego(contexto);
                     juego.insertarJugador(correctas,tUsuario.getText().toString());
+                    overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
                     finish();
                 }
             }

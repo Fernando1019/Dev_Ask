@@ -41,7 +41,7 @@ public class LogroArrayAdapter<T> extends ArrayAdapter<T> {
         TextView logro = (TextView)listItemView.findViewById(android.R.id.text2);
 
         //Obteniendo instancia de la Tarea en la posición actual
-        T item = (T)getItem(position);
+        Logro item = (Logro) getItem(position);
 
         //Dividir la cadena en Nombre y Hora
         String cadenaBruta;
@@ -49,10 +49,10 @@ public class LogroArrayAdapter<T> extends ArrayAdapter<T> {
         String delimitador = ",";
 
         cadenaBruta = item.toString();
-        subCadenas = cadenaBruta.split(delimitador,2);
 
-        jugador.setText(subCadenas[0]);
-        logro.setText(subCadenas[1]);
+        subCadenas = cadenaBruta.split(delimitador,2);
+        jugador.setText("Nombre: "+item.getJugador());
+        logro.setText("Preguntas correctas: "+item.getRespuestasCorrectas());
 
         //Devolver al ListView la fila creada
         return listItemView;

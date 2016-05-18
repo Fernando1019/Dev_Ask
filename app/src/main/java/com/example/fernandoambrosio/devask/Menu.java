@@ -6,23 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.fernandoambrosio.devask.Logica.InterfazJuego;
-import com.example.fernandoambrosio.devask.Logica.Juego;
-import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
 import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
-import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
-import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
-import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
-
-import java.util.Random;
 
 /**
  * Created by Fernando Ambrosio on 19/04/2016.
  */
 public class Menu extends AppCompatActivity {
-    private AccesoUsuario acceso;
     DatabaseHelper base;
 
     @Override
@@ -40,10 +31,10 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.buttonPuntos) {
-                    Intent intent = new Intent(Menu.this, RankingActivity.class);
+                    Intent intent = new Intent(Menu.this, Historial.class);
+                    overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
                     startActivity(intent);
 
-                    finish();
                 }
             }
 

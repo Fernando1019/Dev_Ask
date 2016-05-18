@@ -28,7 +28,6 @@ public class AccesoJuego {
                 "(SELECT Pregunta_idPregunta AS id , Respuesta  FROM RespuestaDirecta WHERE idRespuestaDirecta = "+
                         String.valueOf(id)+") AS directa ON directa.id  = " +
                         "Pregunta.idPregunta;";
-        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaDirectaTipo preguntaDirectaTipo = new PreguntaDirectaTipo();
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
@@ -46,7 +45,6 @@ public class AccesoJuego {
     public int[] cantidadDatosTabla(String tabla, int idCategoria){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="SELECT idRespuesta"+tabla+" AS ids  FROM Respuesta"+tabla+" WHERE categoria_idCategoria ="+String.valueOf(idCategoria);
-        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int ids[]=new int[cursor.getCount()];
         int a=0;
@@ -65,7 +63,6 @@ public class AccesoJuego {
         String consulta ="SELECT contexto,  directa.respuesta AS resp  FROM Pregunta INNER JOIN(SELECT " +
                 "Pregunta_idPregunta as id, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
                 ") AS directa ON directa.id = Pregunta.idPregunta;";
-        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaVF preguntavf = new PreguntaVF();
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
@@ -81,7 +78,6 @@ public class AccesoJuego {
     public int[] CantidadPreguntas(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta = "SELECT correctas, totalPregunta from Logro";
-        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int[] cantidades = new int[2];
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
@@ -101,7 +97,6 @@ public class AccesoJuego {
     public void actualizarCantidades(int correctas, int cantidad){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="UPDATE Logro SET totalPregunta= "+String.valueOf(cantidad)+", nombre="+String.valueOf(correctas)+" WHERE idLogro=1";
-        System.out.println(consulta);
         db.rawQuery(consulta,null);
         db.close();
     }
@@ -124,7 +119,6 @@ public class AccesoJuego {
         int total=0;
         SQLiteDatabase db  = dbHelper.getWritableDatabase();
         String consulta ="SELECT count(idjugador) as total FROM jugador";
-        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
@@ -141,7 +135,6 @@ public class AccesoJuego {
         int idJugador= cantidadDeJugadores()+1;
         SQLiteDatabase db1 = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        System.out.println(idJugador);
         values.put("idjugador",idJugador);
         values.put("nombre",nombre);
         db1.insert("jugador",null,values);
@@ -168,7 +161,6 @@ public class AccesoJuego {
         int idCategoria=0;
         SQLiteDatabase db  = dbHelper.getWritableDatabase();
         String consulta ="SELECT idCategoria FROM Categoria WHERE  nombre=\""+categoria+"\"";
-        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
@@ -199,8 +191,7 @@ public class AccesoJuego {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta = "SELECT nombre, respuestasCorrectas FROM jugador INNER JOIN \n" +
                 "(SELECT * FROM logro) as llogroObtenido ON llogroObtenido.jugador_idjugador = jugador.idjugador";
-        System.out.println(consulta);
-        Cursor cursor = db.rawQuery(consulta,null);
+         Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
                 String nombre=cursor.getString(cursor.getColumnIndex("nombre"));

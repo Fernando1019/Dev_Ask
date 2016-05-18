@@ -14,9 +14,6 @@ public class Musica {
     private CountDownTimer crono;
     private MediaPlayer reproductor;
     public void reproducirSeleccion(Context context){
-        if(reproductor.isPlaying()) {
-            reproductor.pause();
-        }
         reproductor = MediaPlayer.create(context, R.raw.seleccion);
 
         reproductor.start();

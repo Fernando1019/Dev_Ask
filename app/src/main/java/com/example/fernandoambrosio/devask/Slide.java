@@ -1,14 +1,10 @@
 package com.example.fernandoambrosio.devask;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ViewFlipper;
-
-import com.example.fernandoambrosio.devask.baseDeDatos.AccesoUsuario;
-import com.example.fernandoambrosio.devask.baseDeDatos.DatabaseHelper;
 
 /**
  * Created by josueChaqui on 25/04/2016.

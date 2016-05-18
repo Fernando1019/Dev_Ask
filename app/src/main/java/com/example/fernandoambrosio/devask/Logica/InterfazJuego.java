@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.fernandoambrosio.devask.Categoria;
 import com.example.fernandoambrosio.devask.Historial;
+import com.example.fernandoambrosio.devask.Menu;
 import com.example.fernandoambrosio.devask.PreguntaFv;
 import com.example.fernandoambrosio.devask.PreguntaSeleccion;
 import com.example.fernandoambrosio.devask.R;
@@ -87,6 +88,10 @@ public class InterfazJuego extends AppCompatActivity {
             Intent intent = new Intent(contexto,Historial.class);
             contexto.startActivity(intent);
         }
+    }
+    public void cancelar(){
+        Intent intent = new Intent(contexto,Menu.class);
+        contexto.startActivity(intent);
     }
 
 }

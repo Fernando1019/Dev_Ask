@@ -16,16 +16,18 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
         <TextView
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DevAsk "
             android:textSize="20dp" />
 
         <Button
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/regresar"
-            android:id="@+id/button"
+            android:id="@+id/buttonRegresar"
             android:layout_alignParentRight="true"
             style="@style/Widget.AppCompat.Button.Borderless"/>
     </android.support.v7.widget.Toolbar>
@@ -180,9 +182,10 @@
                 android:layout_weight="0.36"></LinearLayout>
 
             <Button
+                android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aceptar"
+                android:text="Guardar"
                 android:id="@+id/btAceptarRanking"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/bk_boton_plano" />
@@ -195,6 +198,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#ffffff"
                 android:text="Compartir"
                 android:id="@+id/btCompartir"
                 android:layout_gravity="center_horizontal"

@@ -53,25 +53,22 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         btDetenerVf = (Button) this.findViewById(R.id.btStopSel);
         btPausaFv = (Button)this.findViewById(R.id.btPausaSel);
          musica = new Musica();
-        crono =  new CountDownTimer(9000, 1000) {
 
-            public void onTick(long millisUntilFinished) {
-                txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
-            }
-
-            public void onFinish() {
-                musica.reproducirError(contexto);
-                mandarNuevoJuego();
-            }
-        }.start();
         Bundle bundle = getIntent().getExtras();
         this.respuestaCorrecta= bundle.getString("correcta");
         categoria = bundle.getInt("idCategoria");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
+
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         txtVSeleccion.setText(bundle.getString("pregunta"));
 
         correctas= Integer.valueOf(bundle.getString("correctas"));
+        if(cantidad>10){
+            InterfazJuego interfaz = new InterfazJuego(contexto);
+            interfaz.registrar(this.correctas,this.categoria);
+            overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+            finish();
+        }
         cantidadCorrectas.setText(String.valueOf(correctas));
 
         respuestas = new String[3];
@@ -87,6 +84,17 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta2.setText(resp2);
         respuesta3.setText(resp3);
         contexto= this;
+        crono =  new CountDownTimer(9000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
+            }
+
+            public void onFinish() {
+                musica.reproducirError(contexto);
+                mandarNuevoJuego();
+            }
+        }.start();
         respuesta1.setOnClickListener(  new View.OnClickListener() {
 
             @Override
@@ -126,7 +134,11 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         btDetenerVf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                crono.cancel();
+                InterfazJuego juego = new InterfazJuego(contexto);
+                juego.cancelar();
+                overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+                finish();
             }
         });
         }
@@ -152,8 +164,6 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     }
     private void mandarNuevoJuego(){
         if(cantidad<10){
-            System.out.println("jueoo");
-            System.out.println(cantidad);
             jugar();
             overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             finish();
@@ -169,7 +179,6 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
         interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
-        finish();
     }
 
 }

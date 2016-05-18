@@ -15,17 +15,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="FALSA O VERDADERA"
             android:textSize="20dp" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pausa"
+            android:textColor="#ffffff"
             android:id="@+id/btPausaVf"
             style="@style/Widget.AppCompat.Button.Borderless"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="Stop"
             android:id="@+id/btStopVf"
             style="@style/Widget.AppCompat.Button.Borderless"
