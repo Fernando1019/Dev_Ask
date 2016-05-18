@@ -48,6 +48,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_gravity="left|top"
+            android:textfont="Roboto"
+            android:textStyle="bold"
             android:text="Cultura" />
 
         <EditText
@@ -55,6 +57,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText3"
             android:layout_gravity="left|bottom"
+            android:textStyle="bold"
             android:text="Geografia" />
 
         <EditText
@@ -62,6 +65,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText4"
             android:layout_gravity="right|bottom"
+            android:textStyle="bold"
             android:text="Musica" />
 
         <EditText
@@ -70,6 +74,7 @@
             android:id="@+id/editText5"
             android:layout_gravity="right|center_vertical"
             android:text="Personajes"
+            android:textStyle="bold"
             android:textColor="@color/abc_primary_text_material_light" />
 
         <EditText
@@ -85,7 +90,8 @@
             android:id="@+id/editText2"
             android:layout_gravity="right|top"
             android:text="gastronomia "
-            android:textColor="#000000" />
+            android:textStyle="bold"
+            android:textColor="#ffffff" />
 
         <ImageSwitcher
             android:layout_width="198dp"

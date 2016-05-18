@@ -53,7 +53,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         btDetenerVf = (Button) this.findViewById(R.id.btStopSel);
         btPausaFv = (Button)this.findViewById(R.id.btPausaSel);
          musica = new Musica();
-        crono =  new CountDownTimer(20000, 1000) {
+        crono =  new CountDownTimer(9000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
@@ -118,11 +118,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
                     pausado=false;
                 }
                 else{
-                    try {
-                        crono.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    crono.cancel();
                     pausado=true;
                 }
             }
@@ -159,9 +155,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             jugar();
         }
         else{
-            Juego juego = new Juego(this);
-            Intent intent = new Intent(this,RankingActivity.class);
-            startActivity(intent);
+            InterfazJuego interfazJuego = new InterfazJuego(this);
+            interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
             finish();
         }
     }

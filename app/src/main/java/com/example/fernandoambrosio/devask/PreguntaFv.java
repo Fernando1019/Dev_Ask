@@ -61,7 +61,7 @@ public class PreguntaFv extends AppCompatActivity {
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));
-        crono = new CountDownTimer(20000, 1000) {
+        crono = new CountDownTimer(9000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtCronoFv.setText(String.valueOf(millisUntilFinished / 1000) );
@@ -81,8 +81,8 @@ public class PreguntaFv extends AppCompatActivity {
                 }
                 else{
                     try {
-                        crono.wait();
-                    } catch (InterruptedException e) {
+                        crono.cancel();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     pausado=true;
@@ -136,10 +136,8 @@ public class PreguntaFv extends AppCompatActivity {
             jugar();
         }
         else{
-            Juego juego = new Juego(this);
-            Intent intent = new Intent(this,RankingActivity.class);
-            startActivity(intent);
-            finish();
+            InterfazJuego interfaz = new InterfazJuego(contexto);
+            interfaz.registrar(this.correctas,this.categoria);
         }
     }
     public  void jugar() {

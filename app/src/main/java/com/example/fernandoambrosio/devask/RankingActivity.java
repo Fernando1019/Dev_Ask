@@ -31,7 +31,7 @@ public class RankingActivity extends AppCompatActivity {
         Juego juego = new Juego(this);
         //int[] cantidades = juego.seleccionarLogros();
         Bundle bundle = getIntent().getExtras();
-        String categoria = bundle.getString("idCategoria");
+        int categoria = bundle.getInt("idCategoria");
         correctas = bundle.getInt("correctas");
         idCategoria = bundle.getInt("idCategoria");
         txCorrectas.setText(String.valueOf(correctas));
