@@ -168,4 +168,5 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
         finish();
     }
+
 }

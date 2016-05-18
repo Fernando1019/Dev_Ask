@@ -57,7 +57,6 @@ public class PreguntaFv extends AppCompatActivity {
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         correctas= Integer.valueOf(bundle.getString("correctas"));
 
-
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));

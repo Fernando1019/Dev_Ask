@@ -166,6 +166,5 @@ public class Categoria extends AppCompatActivity {
         if (timer != null) {
             startSlider();
         }
-
     }
 }
