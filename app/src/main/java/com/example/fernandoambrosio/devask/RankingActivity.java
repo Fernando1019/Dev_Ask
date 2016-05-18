@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.fernandoambrosio.devask.Logica.Juego;
+import com.example.fernandoambrosio.devask.baseDeDatos.AccesoJuego;
 
 /**
  * Created by josueChaqui on 19/04/2016.
@@ -17,6 +18,7 @@ public class RankingActivity extends AppCompatActivity {
     private TextView cantidadPreg, txCorrectas, txincorrectas, textView4;
     private Button aceptar, compartir;
     private int idCategoria, correctas;
+    AccesoJuego acceso;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +33,14 @@ public class RankingActivity extends AppCompatActivity {
         Juego juego = new Juego(this);
         //int[] cantidades = juego.seleccionarLogros();
         Bundle bundle = getIntent().getExtras();
-        int categoria = bundle.getInt("idCategoria");
+        acceso = new AccesoJuego(this);
+
         correctas = bundle.getInt("correctas");
         idCategoria = bundle.getInt("idCategoria");
         txCorrectas.setText(String.valueOf(correctas));
-        txCorrectas.setText(String.valueOf(10-correctas));
+        txincorrectas.setText(String.valueOf(10-correctas));
         cantidadPreg.setText(String.valueOf(10));
-        textView4.setText(textView4.getText()+" "+categoria);
+        textView4.setText(textView4.getText()+" "+acceso.seleccionarNombreCategoria(idCategoria));
 
 
         aceptar.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +58,9 @@ public class RankingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, "En la Categoria de (Jas App)");
+                intent.putExtra(Intent.EXTRA_TEXT, "En la Categoria de "+acceso.seleccionarNombreCategoria(idCategoria)+
+                        " de Guatemala he respondido "+String.valueOf(correctas)+" pregutas"+
+                        "\n para aprender más sobre Guatemala descarga JasApp");
                 startActivity(Intent.createChooser(intent, "Share with"));
             }
         });

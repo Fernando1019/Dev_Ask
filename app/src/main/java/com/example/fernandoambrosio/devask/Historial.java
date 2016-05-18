@@ -21,7 +21,7 @@ public class Historial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.entrada);
+        setContentView(R.layout.historial);
         lista = (ListView)findViewById(R.id.listHistorial);
         DataSource dataSource = new DataSource();
         dataSource.seleccioonarLogros(this);

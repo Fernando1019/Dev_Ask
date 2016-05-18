@@ -152,8 +152,11 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     }
     private void mandarNuevoJuego(){
         if(cantidad<10){
+            System.out.println("jueoo");
+            System.out.println(cantidad);
             jugar();
             overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
+            finish();
         }
         else{
             InterfazJuego interfazJuego = new InterfazJuego(this);

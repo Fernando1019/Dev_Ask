@@ -14,7 +14,11 @@ public class Musica {
     private CountDownTimer crono;
     private MediaPlayer reproductor;
     public void reproducirSeleccion(Context context){
+        if(reproductor.isPlaying()) {
+            reproductor.pause();
+        }
         reproductor = MediaPlayer.create(context, R.raw.seleccion);
+
         reproductor.start();
         new Handler().postDelayed(new Runnable(){
 
@@ -25,6 +29,9 @@ public class Musica {
         },3000);
     }
     public void reproducirError( Context context){
+        if(reproductor.isPlaying()) {
+            reproductor.pause();
+        }
         reproductor = MediaPlayer.create(context, R.raw.fallo);
         reproductor.start();
         new Handler().postDelayed(new Runnable(){
@@ -36,6 +43,9 @@ public class Musica {
         },3000);
     }
     public void reproducirCorrecto(Context context){
+        if(reproductor.isPlaying()) {
+            reproductor.pause();
+        }
         reproductor = MediaPlayer.create(context,R.raw.ganar);
         reproductor.start();
 

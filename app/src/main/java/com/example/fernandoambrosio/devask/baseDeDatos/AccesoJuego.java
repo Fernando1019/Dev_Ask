@@ -129,32 +129,39 @@ public class AccesoJuego {
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
                 total=Integer.valueOf(cursor.getString(cursor.getColumnIndex("total")));
-                cursor.close();
             } while (cursor.moveToNext());
+            if(cursor != null && !cursor.isClosed()){
+                cursor.close();
+            }
         }
         db.close();
         return total;
     }
     public void insertarJugador(String nombre,int correctas){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
         int idJugador= cantidadDeJugadores()+1;
+        SQLiteDatabase db1 = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        System.out.println(idJugador);
         values.put("idjugador",idJugador);
         values.put("nombre",nombre);
-        long StudentId =db.insert("jugador",null,values);
-        db.close();
+        db1.insert("jugador",null,values);
+        if (db1 != null) {
+            db1.close();
+        }
         this.insertCantidades(correctas,idJugador);
     }
     public void insertCantidades(int correctas,  int idJugador){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
         int logro= cantidadDeLogros()+1;
-        values.put("idLogro",logro);
-        values.put("correctas",correctas);
-        values.put("totalPregunta",10);
-        values.put("idJugador",idJugador);
-        long StudentId =db.insert("logro",null,values);
-        db.close();
+        SQLiteDatabase db2 = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("idlogro",logro);
+        values.put("respuestasCorrectas",correctas);
+        values.put("TotalPregunta",10);
+        values.put("jugador_idjugador",idJugador);
+        db2.insert("logro",null,values);
+        if (db2 != null) {
+            db2.close();
+        }
     }
 
     public int seleccionarIdCategoria(String categoria){
