@@ -134,15 +134,16 @@ public class PreguntaFv extends AppCompatActivity {
     private void mandarNuevoJuego(){
         if(cantidad<10){
             jugar();
+            overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
         }
         else{
             InterfazJuego interfaz = new InterfazJuego(contexto);
             interfaz.registrar(this.correctas,this.categoria);
+            overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
         }
     }
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
-        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
         finish();
     }
 }

@@ -1,17 +1,15 @@
 package com.example.fernandoambrosio.devask;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
 import android.view.Window;
 import android.view.WindowManager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+
+
 
 /**
  * Created by Fernando Ambrosio on 16/04/2016.
@@ -19,7 +17,7 @@ import java.io.OutputStreamWriter;
 public class EntradaActivity extends  AppCompatActivity {
 
     // Duración en milisegundos que se mostrará el splash
-    private final int DURACION_SPLASH = 4000; // 5 segundos
+    private final int DURACION_SPLASH = 4000; // 4 segundos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +31,7 @@ public class EntradaActivity extends  AppCompatActivity {
             public void run(){
                 Intent intent = new Intent(EntradaActivity.this, Menu.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.zoom_entrada,R.anim.zoom_salida);
                 finish();
             };
         }, DURACION_SPLASH);

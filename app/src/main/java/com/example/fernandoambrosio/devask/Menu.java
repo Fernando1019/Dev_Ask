@@ -42,6 +42,7 @@ public class Menu extends AppCompatActivity {
                 if (v.getId() == R.id.buttonPuntos) {
                     Intent intent = new Intent(Menu.this, RankingActivity.class);
                     startActivity(intent);
+
                     finish();
                 }
             }
@@ -49,6 +50,7 @@ public class Menu extends AppCompatActivity {
         });
 
         Button boton_jugar = (Button) findViewById(R.id.buttonJugar);
+
         boton_jugar.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,7 +64,9 @@ public class Menu extends AppCompatActivity {
     }
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
+
         interfazJuego.abrirCategorias();
+
         finish();
     }
 }

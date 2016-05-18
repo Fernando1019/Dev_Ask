@@ -66,30 +66,35 @@ public class Categoria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EnviarCategoria(categorias[0]);
+                overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             }
         });
         imagen2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EnviarCategoria(categorias[1]);
+                overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             }
         });
         imagen3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EnviarCategoria(categorias[2]);
+                overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             }
         });
         imagen4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EnviarCategoria(categorias[3]);
+                overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             }
         });
         imagen5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EnviarCategoria(categorias[4]);
+                overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
             }
         });
         imageSwitcher.setOnClickListener(new View.OnClickListener() {

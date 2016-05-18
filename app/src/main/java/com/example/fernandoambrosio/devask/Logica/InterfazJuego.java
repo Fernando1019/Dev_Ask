@@ -2,11 +2,13 @@ package com.example.fernandoambrosio.devask.Logica;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.fernandoambrosio.devask.Categoria;
 import com.example.fernandoambrosio.devask.Historial;
 import com.example.fernandoambrosio.devask.PreguntaFv;
 import com.example.fernandoambrosio.devask.PreguntaSeleccion;
+import com.example.fernandoambrosio.devask.R;
 import com.example.fernandoambrosio.devask.RankingActivity;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
@@ -17,7 +19,7 @@ import java.util.Random;
 /**
  * Created by josueChaqui on 9/05/2016.
  */
-public class InterfazJuego {
+public class InterfazJuego extends AppCompatActivity {
    private Context contexto;
 
     public InterfazJuego(Context contexto) {
@@ -59,6 +61,8 @@ public class InterfazJuego {
     public void abrirCategorias(){
         Intent intent =new Intent(contexto, Categoria.class);
         contexto.startActivity(intent);
+
+
     }
     public void SeleccionarCategoria(String categoria){
         Juego juego = new Juego(contexto);
