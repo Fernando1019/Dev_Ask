@@ -26,9 +26,15 @@ public class Musica {
         },3000);
     }
     public void reproducirError( Context context){
-        if(reproductor.isPlaying()) {
-            reproductor.pause();
+        try {
+            if (reproductor.isPlaying()) {
+                reproductor.stop();
+            }
         }
+        catch(Exception e){
+            reproductor = MediaPlayer.create(context, R.raw.fallo);
+            }
+
         reproductor = MediaPlayer.create(context, R.raw.fallo);
         reproductor.start();
         new Handler().postDelayed(new Runnable(){

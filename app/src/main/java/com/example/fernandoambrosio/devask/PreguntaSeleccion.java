@@ -63,6 +63,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         txtVSeleccion.setText(bundle.getString("pregunta"));
 
         correctas= Integer.valueOf(bundle.getString("correctas"));
+        contexto= this;
         if(cantidad>10){
             InterfazJuego interfaz = new InterfazJuego(contexto);
             interfaz.registrar(this.correctas,this.categoria);
@@ -70,7 +71,17 @@ public class PreguntaSeleccion  extends AppCompatActivity {
             finish();
         }
         cantidadCorrectas.setText(String.valueOf(correctas));
+        crono =  new CountDownTimer(16000, 1000) {
 
+            public void onTick(long millisUntilFinished) {
+                txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
+            }
+
+            public void onFinish() {
+                musica.reproducirError(contexto);
+                mandarNuevoJuego();
+            }
+        }.start();
         respuestas = new String[3];
         respuestas[0]= bundle.getString("respuesta1");
         respuestas[1]= bundle.getString("respuesta2");
@@ -83,18 +94,8 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         respuesta1.setText(resp1);
         respuesta2.setText(resp2);
         respuesta3.setText(resp3);
-        contexto= this;
-        crono =  new CountDownTimer(9000, 1000) {
 
-            public void onTick(long millisUntilFinished) {
-                txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
-            }
 
-            public void onFinish() {
-                musica.reproducirError(contexto);
-                mandarNuevoJuego();
-            }
-        }.start();
         respuesta1.setOnClickListener(  new View.OnClickListener() {
 
             @Override
