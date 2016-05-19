@@ -30,12 +30,11 @@ public class Musica {
             if (reproductor.isPlaying()) {
                 reproductor.stop();
             }
+            reproductor = MediaPlayer.create(context, R.raw.fallo);
         }
         catch(Exception e){
             reproductor = MediaPlayer.create(context, R.raw.fallo);
             }
-
-        reproductor = MediaPlayer.create(context, R.raw.fallo);
         reproductor.start();
         new Handler().postDelayed(new Runnable(){
 
@@ -46,12 +45,16 @@ public class Musica {
         },3000);
     }
     public void reproducirCorrecto(Context context){
-        if(reproductor.isPlaying()) {
-            reproductor.pause();
+        try {
+            if (reproductor.isPlaying()) {
+                reproductor.stop();
+            }
+            reproductor = MediaPlayer.create(context, R.raw.ganar);
         }
-        reproductor = MediaPlayer.create(context,R.raw.ganar);
+        catch(Exception e){
+            reproductor = MediaPlayer.create(context, R.raw.ganar);
+        }
         reproductor.start();
-
         new Handler().postDelayed(new Runnable(){
 
             @Override

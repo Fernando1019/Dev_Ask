@@ -56,6 +56,7 @@ public class PreguntaFv extends AppCompatActivity {
         respuesta= bundle.getString("respuesta");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         correctas= Integer.valueOf(bundle.getString("correctas"));
+        contexto= this;
         if(cantidad>10){
             InterfazJuego interfaz = new InterfazJuego(contexto);
             interfaz.registrar(this.correctas,this.categoria);
