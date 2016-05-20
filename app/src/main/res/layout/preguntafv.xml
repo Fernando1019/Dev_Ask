@@ -60,6 +60,15 @@
                 android:layout_weight="0.05"
                 android:textColor="#ffffff"
                 android:textSize="30dp" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/barraDeProgreso"
+                android:layout_weight="0.73" />
+
         </LinearLayout>
 
         <LinearLayout

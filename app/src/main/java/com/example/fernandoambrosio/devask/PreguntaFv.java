@@ -2,6 +2,7 @@ package com.example.fernandoambrosio.devask;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import java.util.Random;
  */
 public class PreguntaFv extends AppCompatActivity {
     private Context contexto;
+    private ProgressBar barraDeProgreso;
     private Musica musica;
     private TextView preguntaFV, txtCronoFv;
     private Button botonFalso, botonVerdadero, btPausaFv, btDetenerVf;
@@ -35,6 +38,10 @@ public class PreguntaFv extends AppCompatActivity {
     private TextView cantidadCorrectas;
     private CountDownTimer crono;
     private  boolean pausado;
+    public static final int segundos=16;
+    public static final int milisegundos= segundos*1000;
+    public static final int delay= 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,6 +57,10 @@ public class PreguntaFv extends AppCompatActivity {
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
         btDetenerVf = (Button) this.findViewById(R.id.btStopVf);
         btPausaFv = (Button)this.findViewById(R.id.btPausaVf);
+        barraDeProgreso =(ProgressBar)findViewById(R.id.barraDeProgreso);
+        barraDeProgreso.getProgressDrawable().setColorFilter(
+                Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
+        barraDeProgreso.setMax(maximoProgreso());
         musica = new Musica();
         Bundle bundle = getIntent().getExtras();
         categoria = bundle.getInt("idCategoria");
@@ -67,10 +78,11 @@ public class PreguntaFv extends AppCompatActivity {
         preguntaFV.setText(bundle.getString("pregunta"));
         cantidadView.setText(String.valueOf(cantidad)+"/10");
         cantidadCorrectas.setText(String.valueOf(correctas));
-        crono = new CountDownTimer(16000, 1000) {
+        crono = new CountDownTimer(milisegundos, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtCronoFv.setText(String.valueOf(millisUntilFinished / 1000) );
+                barraDeProgreso.setProgress(establecer_progreso(millisUntilFinished));
             }
 
             public void onFinish() {
@@ -122,7 +134,13 @@ public class PreguntaFv extends AppCompatActivity {
         });
         contexto= this;
     }
+    private int establecer_progreso(long milisegundos){
+        return (int) ((this.milisegundos-milisegundos)/1000);
 
+    }
+    private int maximoProgreso(){
+        return segundos-delay;
+    }
     public void verificarPregunta(String respuestaSeleccionada){
         crono.cancel();
         if (this.respuesta.compareTo(respuestaSeleccionada)==0){

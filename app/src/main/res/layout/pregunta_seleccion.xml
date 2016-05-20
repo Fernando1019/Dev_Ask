@@ -52,9 +52,16 @@
             android:layout_height="match_parent"
             android:text="New Text"
             android:id="@+id/txtCronoSeleccion"
-            android:layout_weight="0.35"
+            android:layout_weight="0.05"
             android:textColor="#ffffff"
             android:textSize="30dp" />
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/barraDeProgresoSel"
+            android:layout_weight="0.73" />
     </LinearLayout>
 
     <LinearLayout

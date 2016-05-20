@@ -2,6 +2,7 @@ package com.example.fernandoambrosio.devask;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import java.util.Random;
  */
 public class PreguntaSeleccion  extends AppCompatActivity {
     private Context contexto;
+    private ProgressBar barraDeProgreso;
     private  Musica musica;
     private Button respuesta1, respuesta2,respuesta3, btPausaFv, btDetenerVf;;
     private String respuestaCorrecta;
@@ -36,6 +39,9 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     private TextView cantidadView, cantidadCorrectas, txtCronoSeleccion, txtVSeleccion;
     private CountDownTimer crono;
     private  boolean pausado;
+    public static final int segundos=16;
+    public static final int milisegundos= segundos*1000;
+    public static final int delay= 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,6 +58,10 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
         btDetenerVf = (Button) this.findViewById(R.id.btStopSel);
         btPausaFv = (Button)this.findViewById(R.id.btPausaSel);
+        barraDeProgreso =(ProgressBar)findViewById(R.id.barraDeProgresoSel);
+        barraDeProgreso.getProgressDrawable().setColorFilter(
+                Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
+        barraDeProgreso.setMax(maximoProgreso());
          musica = new Musica();
 
         Bundle bundle = getIntent().getExtras();
@@ -75,6 +85,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
                 txtCronoSeleccion.setText(String.valueOf(millisUntilFinished / 1000) );
+                barraDeProgreso.setProgress(establecer_progreso(millisUntilFinished));
             }
 
             public void onFinish() {
@@ -180,6 +191,13 @@ public class PreguntaSeleccion  extends AppCompatActivity {
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
         interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
+    }
+    private int establecer_progreso(long milisegundos){
+        return (int) ((this.milisegundos-milisegundos)/1000);
+
+    }
+    private int maximoProgreso(){
+        return segundos-delay;
     }
 
 }
