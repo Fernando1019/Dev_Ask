@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(v.getId() == R.id.buttonAceptar) {
                     InterfazJuego juego = new InterfazJuego(contexto);
-                    juego.insertarJugador(correctas,tUsuario.getText().toString());
+                    juego.insertarJugador(correctas,tUsuario.getText().toString(),idCategoria);
                     overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
                     finish();
                 }

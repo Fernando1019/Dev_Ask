@@ -62,7 +62,10 @@ public class Aleatorio {
     public int numero(int num){
         while(true){
             int n = ran.nextInt(num);
+            System.out.println("aa");
+            System.out.println(String.valueOf(n));
                 return n;
+
             }
         }
     public int numeroMenosCero(int num){

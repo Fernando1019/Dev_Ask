@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.fernandoambrosio.devask.tipos.Logro;
 import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
+import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
 import java.util.ArrayList;
@@ -22,29 +23,36 @@ public class AccesoJuego {
         dbHelper = new DatabaseHelper(contexto);
     }
 
-    public PreguntaDirectaTipo getPreguntaTipo(int id){
+    public PreguntaOpcionMultiple getPreguntaTipo(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta = "SELECT contexto,  directa.Respuesta AS resp  FROM Pregunta INNER JOIN" +
-                "(SELECT Pregunta_idPregunta AS id , Respuesta  FROM RespuestaDirecta WHERE idRespuestaDirecta = "+
-                        String.valueOf(id)+") AS directa ON directa.id  = " +
-                        "Pregunta.idPregunta;";
+        String consulta = "SELECT respuesta1, respuesta2, respuesta3, pregunta FROM RespuestaDirecta WHERE idRespuestaDirecta =  "+
+                        String.valueOf(id);
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
-        PreguntaDirectaTipo preguntaDirectaTipo = new PreguntaDirectaTipo();
+        PreguntaOpcionMultiple preguntaOpcionMultiple = new PreguntaOpcionMultiple();
+        String pregunta = "";
+        String[] respuestas = new String[3];
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
-                preguntaDirectaTipo.setRespuesta(cursor.getString(cursor.getColumnIndex("resp")));
-                System.out.println(preguntaDirectaTipo.getRespuesta());
-                preguntaDirectaTipo.setContexto(cursor.getString(cursor.getColumnIndex("contexto")));
-                cursor.close();
+                pregunta= cursor.getString(cursor.getColumnIndex("pregunta"));
+                respuestas[0] = cursor.getString(cursor.getColumnIndex("respuesta1"));
+                respuestas[1] = cursor.getString(cursor.getColumnIndex("respuesta2"));
+                respuestas[2] = cursor.getString(cursor.getColumnIndex("respuesta3"));
+
             } while (cursor.moveToNext());
+            cursor.close();
         }
         db.close();
-        return preguntaDirectaTipo;
+        preguntaOpcionMultiple.setContexto(pregunta);
+        preguntaOpcionMultiple.setRespuesta(respuestas);
+        preguntaOpcionMultiple.setCorrecta(1);
+        return preguntaOpcionMultiple;
     }
 
     public int[] cantidadDatosTabla(String tabla, int idCategoria){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta ="SELECT idRespuesta"+tabla+" AS ids  FROM Respuesta"+tabla+" WHERE categoria_idCategoria ="+String.valueOf(idCategoria);
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int ids[]=new int[cursor.getCount()];
         int a=0;
@@ -60,15 +68,14 @@ public class AccesoJuego {
     }
     public PreguntaVF getPregutaVF(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="SELECT contexto,  directa.respuesta AS resp  FROM Pregunta INNER JOIN(SELECT " +
-                "Pregunta_idPregunta as id, respuesta  FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id)+
-                ") AS directa ON directa.id = Pregunta.idPregunta;";
+        String consulta ="SELECT respuesta,  pregunta FROM RespuestaVF WHERE idRespuestaVF = "+String.valueOf(id);
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         PreguntaVF preguntavf = new PreguntaVF();
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
-                preguntavf.setRespuesta(cursor.getString(cursor.getColumnIndex("resp")));
-                preguntavf.setContexto(cursor.getString(cursor.getColumnIndex("contexto")));
+                preguntavf.setRespuesta(cursor.getString(cursor.getColumnIndex("respuesta")));
+                preguntavf.setContexto(cursor.getString(cursor.getColumnIndex("pregunta")));
                 cursor.close();
             } while (cursor.moveToNext());
         }
@@ -78,6 +85,7 @@ public class AccesoJuego {
     public int[] CantidadPreguntas(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta = "SELECT correctas, totalPregunta from Logro";
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         int[] cantidades = new int[2];
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
@@ -94,12 +102,7 @@ public class AccesoJuego {
         db.close();
         return  cantidades;
     }
-    public void actualizarCantidades(int correctas, int cantidad){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta ="UPDATE Logro SET totalPregunta= "+String.valueOf(cantidad)+", nombre="+String.valueOf(correctas)+" WHERE idLogro=1";
-        db.rawQuery(consulta,null);
-        db.close();
-    }
+
     private int cantidadDeLogros(){
         int total=0;
         SQLiteDatabase db  = dbHelper.getWritableDatabase();
@@ -119,6 +122,7 @@ public class AccesoJuego {
         int total=0;
         SQLiteDatabase db  = dbHelper.getWritableDatabase();
         String consulta ="SELECT count(idjugador) as total FROM jugador";
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
@@ -131,7 +135,7 @@ public class AccesoJuego {
         db.close();
         return total;
     }
-    public void insertarJugador(String nombre,int correctas){
+    public void insertarJugador(String nombre,int correctas, int categoria){
         int idJugador= cantidadDeJugadores()+1;
         SQLiteDatabase db1 = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -141,9 +145,9 @@ public class AccesoJuego {
         if (db1 != null) {
             db1.close();
         }
-        this.insertCantidades(correctas,idJugador);
+        this.insertCantidades(correctas,idJugador, categoria);
     }
-    public void insertCantidades(int correctas,  int idJugador){
+    public void insertCantidades(int correctas,  int idJugador, int categoria){
         int logro= cantidadDeLogros()+1;
         SQLiteDatabase db2 = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -151,6 +155,7 @@ public class AccesoJuego {
         values.put("respuestasCorrectas",correctas);
         values.put("TotalPregunta",10);
         values.put("jugador_idjugador",idJugador);
+        values.put("categoria_idcategoria",categoria);
         db2.insert("logro",null,values);
         if (db2 != null) {
             db2.close();
@@ -161,6 +166,7 @@ public class AccesoJuego {
         int idCategoria=0;
         SQLiteDatabase db  = dbHelper.getWritableDatabase();
         String consulta ="SELECT idCategoria FROM Categoria WHERE  nombre=\""+categoria+"\"";
+        System.out.println(consulta);
         Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
@@ -191,6 +197,7 @@ public class AccesoJuego {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String consulta = "SELECT nombre, respuestasCorrectas FROM jugador INNER JOIN \n" +
                 "(SELECT * FROM logro) as llogroObtenido ON llogroObtenido.jugador_idjugador = jugador.idjugador";
+        System.out.println(consulta);
          Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {

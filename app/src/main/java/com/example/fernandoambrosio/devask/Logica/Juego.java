@@ -29,31 +29,13 @@ public class Juego {
         return fv;
     }
     public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(int idCategoria){
+        int[] cantidadIds= acceso.cantidadDatosTabla("Directa",idCategoria);
+        int numero = aleatorio.numero(cantidadIds.length);
         PreguntaOpcionMultiple multiple = new PreguntaOpcionMultiple();
-        int[] cantidadIds= acceso.cantidadDatosTabla("Directa", idCategoria);
-        System.out.println(cantidadIds.length);
-        int[] idPreguntas = aleatorio.tresNumerosAleatorios(cantidadIds.length);
-        System.out.println(String.valueOf(idPreguntas[0])+" "+String.valueOf(idPreguntas[1])+" "+String.valueOf(idPreguntas[2]));
-        int idCorrecta =aleatorio.numero();
-        System.out.println(String.valueOf(idPreguntas[idCorrecta]));
-        multiple.setContexto(SeleccionarPregunta(cantidadIds[idPreguntas[idCorrecta]]));
-        multiple.setCorrecta(idCorrecta);
-
-        multiple.setRespuesta(respuestas(idPreguntas,cantidadIds));
+       multiple = acceso.getPreguntaTipo(numero);
         return multiple;
     }
 
-    public void actualizarLogro(int cantidadPreguntas, int correctas){
-        int[] cantidadesAnteriores = acceso.CantidadPreguntas();
-        int nuevaCantidadCorrectas= cantidadesAnteriores[0]+correctas;
-        int nuevaCantidadPreguntas= cantidadesAnteriores[1]+cantidadPreguntas;
-        if (cantidadesAnteriores[0]==0){
-            acceso.insertCantidades(nuevaCantidadCorrectas, nuevaCantidadPreguntas);
-        }
-        else {
-            acceso.actualizarCantidades(nuevaCantidadCorrectas, nuevaCantidadPreguntas);
-        }
-    }
 
     public int seleccionarIdCategoria(String categoria){
         int idCategoria= acceso.seleccionarIdCategoria(categoria);
@@ -74,24 +56,9 @@ public class Juego {
     }
 
 
-    private String SeleccionarPregunta(int id){
-        PreguntaDirectaTipo preg=acceso.getPreguntaTipo(id);
-        return preg.getContexto();
-
-    }
-    private String[] respuestas(int[] ids, int[]cantidadIds){
-        String[] retRespuestas= new String[3];
-        int i =0;
-        for(int pregunta:ids){
-            PreguntaDirectaTipo preg=acceso.getPreguntaTipo(cantidadIds[pregunta]);
-            retRespuestas[i]=preg.getRespuesta();
-            i++;
-        }
-        return retRespuestas;
-    }
-    public boolean  insertarJugador(String nombre, int correctas ){
+    public boolean  insertarJugador(String nombre, int correctas, int categoria ){
         if (nombre !=""){
-            acceso.insertarJugador(nombre,correctas);
+            acceso.insertarJugador(nombre,correctas, categoria);
             return  true;
         }
         else{

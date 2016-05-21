@@ -80,9 +80,9 @@ public class InterfazJuego extends AppCompatActivity {
         intent.putExtra("idCategoria",Integer.valueOf(IdCategoria));
         contexto.startActivity(intent);
     }
-    public void insertarJugador(int correctas, String usuario){
+    public void insertarJugador(int correctas, String usuario, int categoria){
         Juego juego = new Juego(contexto);
-        boolean correcto = juego.insertarJugador(usuario,correctas);
+        boolean correcto = juego.insertarJugador(usuario,correctas, categoria);
 
         if (correcto) {
             Intent intent = new Intent(contexto,Historial.class);
