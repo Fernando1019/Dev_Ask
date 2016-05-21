@@ -57,7 +57,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasSeleccion);
         txtCronoSeleccion= (TextView) this.findViewById(R.id.txtCronoSeleccion);
         btDetenerVf = (Button) this.findViewById(R.id.btStopSel);
-        btPausaFv = (Button)this.findViewById(R.id.btPausaSel);
+
         barraDeProgreso =(ProgressBar)findViewById(R.id.barraDeProgresoSel);
         barraDeProgreso.getProgressDrawable().setColorFilter(
                 Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -130,19 +130,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
                 verificar(String.valueOf(respuesta3.getText()));
             }
         });
-        btPausaFv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(pausado) {
-                    crono.start();
-                    pausado=false;
-                }
-                else{
-                    crono.cancel();
-                    pausado=true;
-                }
-            }
-        });
+
         btDetenerVf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

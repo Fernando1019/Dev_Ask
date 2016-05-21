@@ -56,7 +56,7 @@ public class PreguntaFv extends AppCompatActivity {
         txtCronoFv= (TextView) this.findViewById(R.id.txtCronoFV);
         cantidadCorrectas = (TextView) this.findViewById(R.id.txCorrectasFv);
         btDetenerVf = (Button) this.findViewById(R.id.btStopVf);
-        btPausaFv = (Button)this.findViewById(R.id.btPausaVf);
+
         barraDeProgreso =(ProgressBar)findViewById(R.id.barraDeProgreso);
         barraDeProgreso.getProgressDrawable().setColorFilter(
                 Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -90,23 +90,7 @@ public class PreguntaFv extends AppCompatActivity {
                 mandarNuevoJuego();
             }
         }.start();
-        btPausaFv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(pausado) {
-                    crono.start();
-                    pausado=false;
-                }
-                else{
-                    try {
-                        crono.cancel();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    pausado=true;
-                }
-            }
-        });
+
         btDetenerVf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

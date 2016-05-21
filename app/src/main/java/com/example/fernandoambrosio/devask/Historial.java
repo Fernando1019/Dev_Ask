@@ -44,7 +44,7 @@ public class Historial extends AppCompatActivity {
             public void onClick(View v) {
                 InterfazJuego juego = new InterfazJuego(contexto);
                 juego.cancelar();
-                overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+                //overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
                 finish();
 
             }
