@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:text="FALSA O VERDADERA"
-            android:textSize="25dp" />
+            android:textSize="23dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
             android:textColor="#ffffff"
             android:text="Terminar"
             android:id="@+id/btStopVf"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             style="@style/Widget.AppCompat.Button.Borderless"
           />
     </android.support.v7.widget.Toolbar>

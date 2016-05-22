@@ -45,7 +45,7 @@ public class AccesoJuego {
         db.close();
         preguntaOpcionMultiple.setContexto(pregunta);
         preguntaOpcionMultiple.setRespuesta(respuestas);
-        preguntaOpcionMultiple.setCorrecta(1);
+        preguntaOpcionMultiple.setCorrecta(0);
         return preguntaOpcionMultiple;
     }
 
