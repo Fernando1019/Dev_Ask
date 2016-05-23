@@ -21,6 +21,7 @@ import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -37,6 +38,7 @@ public class PreguntaFv extends AppCompatActivity {
     private int cantidad,correctas, categoria;
     private TextView cantidadCorrectas;
     private CountDownTimer crono;
+    private ArrayList<Integer> usados;
     private  boolean pausado;
     public static final int segundos=16;
     public static final int milisegundos= segundos*1000;
@@ -63,8 +65,10 @@ public class PreguntaFv extends AppCompatActivity {
         barraDeProgreso.setMax(maximoProgreso());
         musica = new Musica();
         Bundle bundle = getIntent().getExtras();
+        usados = bundle.getIntegerArrayList("usados");
         categoria = bundle.getInt("idCategoria");
         respuesta= bundle.getString("respuesta");
+
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
         correctas= Integer.valueOf(bundle.getString("correctas"));
         contexto= this;
@@ -158,7 +162,7 @@ public class PreguntaFv extends AppCompatActivity {
     }
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
-        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
+        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria, this.usados);
         finish();
     }
 }

@@ -15,6 +15,7 @@ import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -26,7 +27,8 @@ public class InterfazJuego extends AppCompatActivity {
     public InterfazJuego(Context contexto) {
         this.contexto = contexto;
     }
-    public void seleccionarJuego(int cantidad, int correctas, int idCategoria){
+    public void seleccionarJuego(int cantidad, int correctas, int idCategoria, ArrayList<Integer> utilizadas){
+        ArrayList<Integer> nUtilizados = utilizadas;
         cantidad++;
         Juego juego = new Juego(contexto);
         Aleatorio aleatorio = new Aleatorio();
@@ -35,7 +37,8 @@ public class InterfazJuego extends AppCompatActivity {
 
         if (numero == 1) {
             System.out.println("1");
-            PreguntaVF vf = juego.crearPreguntaVf(idCategoria);
+            PreguntaVF vf = juego.crearPreguntaVf(idCategoria,utilizadas);
+            nUtilizados.add(vf.getId());
             intent = new Intent(contexto, PreguntaFv.class);
             intent.putExtra("pregunta",vf.getContexto());
             intent.putExtra("respuesta",vf.getRespuesta());
@@ -43,7 +46,8 @@ public class InterfazJuego extends AppCompatActivity {
         //preguntaMultiple
         if (numero == 2) {
             System.out.println("2");
-            PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple(idCategoria);
+            PreguntaOpcionMultiple multiple = juego.crearPreguntaOpcionMultiple(idCategoria,utilizadas);
+            nUtilizados.add(multiple.getId());
             intent = new Intent(contexto, PreguntaSeleccion.class);
             String[] respuestas = multiple.getRespuesta();
             intent.putExtra("pregunta",multiple.getContexto());
@@ -57,10 +61,12 @@ public class InterfazJuego extends AppCompatActivity {
         intent.putExtra("cantidad",String.valueOf(cantidad));
         intent.putExtra("correctas",String.valueOf(correctas));
         intent.putExtra("idCategoria",Integer.valueOf(idCategoria));
+        intent.putExtra("usados",nUtilizados);
         contexto.startActivity(intent);
     }
     public void abrirCategorias(){
         Intent intent =new Intent(contexto, Categoria.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         contexto.startActivity(intent);
 
 
@@ -68,16 +74,18 @@ public class InterfazJuego extends AppCompatActivity {
     public void SeleccionarCategoria(String categoria){
         Juego juego = new Juego(contexto);
         int idCategoria = juego.seleccionarIdCategoria(categoria);
-        this.seleccionarJuego(0,0,idCategoria);
+        this.seleccionarJuego(0,0,idCategoria, new ArrayList<Integer>());
     }
     public void registrar(int correctas, int IdCategoria){
         Juego juego = new Juego(contexto);
         Intent intent = new Intent(contexto,RankingActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         String categoria =juego.seleccionarNombreCategoria( IdCategoria);
         intent.putExtra("categoria",categoria);
         intent.putExtra("correctas",correctas);
         System.out.println(IdCategoria);
         intent.putExtra("idCategoria",Integer.valueOf(IdCategoria));
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         contexto.startActivity(intent);
     }
     public void insertarJugador(int correctas, String usuario, int categoria){
@@ -91,6 +99,7 @@ public class InterfazJuego extends AppCompatActivity {
     }
     public void cancelar(){
         Intent intent = new Intent(contexto,Menu.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         contexto.startActivity(intent);
     }
 

@@ -30,6 +30,7 @@ public class EntradaActivity extends  AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             public void run(){
                 Intent intent = new Intent(EntradaActivity.this, Menu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.zoom_entrada,R.anim.zoom_salida);
                 finish();

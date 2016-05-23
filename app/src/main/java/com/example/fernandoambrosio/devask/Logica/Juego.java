@@ -7,6 +7,8 @@ import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -21,18 +23,19 @@ public class Juego {
         aleatorio = new Aleatorio();
 
     }
-    public PreguntaVF crearPreguntaVf(int idCategoria){
+    public PreguntaVF crearPreguntaVf(int idCategoria, ArrayList<Integer> idsSeleccionados){
         int[] cantidadIds= acceso.cantidadDatosTabla("VF",idCategoria);
-        int numero = aleatorio.numero(cantidadIds.length);
+        int numero =seleccionarId(cantidadIds,idsSeleccionados);
         PreguntaVF fv =  acceso.getPregutaVF(cantidadIds[numero]);
-        System.out.println(fv.getRespuesta());
+        fv.setId(cantidadIds[numero]);
         return fv;
     }
-    public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(int idCategoria){
+    public PreguntaOpcionMultiple crearPreguntaOpcionMultiple(int idCategoria, ArrayList<Integer> idsSeleccionados){
         int[] cantidadIds= acceso.cantidadDatosTabla("Directa",idCategoria);
-        int numero = aleatorio.numero(cantidadIds.length);
+        int numero = seleccionarId(cantidadIds,idsSeleccionados);
         PreguntaOpcionMultiple multiple = new PreguntaOpcionMultiple();
-       multiple = acceso.getPreguntaTipo(numero);
+       multiple = acceso.getPreguntaTipo(cantidadIds[numero]);
+        multiple.setId(cantidadIds[numero]);
         return multiple;
     }
 
@@ -46,14 +49,7 @@ public class Juego {
         return nombre;
 
     }
-    public int[] seleccionarLogros(){
-        int[] retorno = new int[3];
-        int[] cantidades= acceso.CantidadPreguntas();
-        retorno[0]=cantidades[0];
-        retorno[1]=cantidades[1];
-        retorno[2]=cantidades[1]-cantidades[0];
-        return retorno;
-    }
+
 
 
     public boolean  insertarJugador(String nombre, int correctas, int categoria ){
@@ -63,6 +59,25 @@ public class Juego {
         }
         else{
             return false;
+        }
+    }
+    private int seleccionarId(int[] cantidadIds, ArrayList<Integer> idsSeleccionados){
+        while (true){
+            boolean bandera= true;
+            System.out.println(cantidadIds.length);
+            int numero = aleatorio.numeroMenosCero(cantidadIds.length);
+            Iterator<Integer> nombreIterator = idsSeleccionados.iterator();
+            while(nombreIterator.hasNext()){
+                int elemento = nombreIterator.next();
+                if(elemento==cantidadIds[numero]){
+                    bandera=false;
+                    break;
+                }
+
+            }
+            if (bandera) {
+                return numero;
+            }
         }
     }
 }

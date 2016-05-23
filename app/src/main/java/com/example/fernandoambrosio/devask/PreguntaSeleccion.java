@@ -22,12 +22,14 @@ import com.example.fernandoambrosio.devask.tipos.PreguntaDirectaTipo;
 import com.example.fernandoambrosio.devask.tipos.PreguntaOpcionMultiple;
 import com.example.fernandoambrosio.devask.tipos.PreguntaVF;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Created by Fernando Ambrosio on 24/04/2016.
  */
 public class PreguntaSeleccion  extends AppCompatActivity {
+    private ArrayList<Integer> usados;
     private Context contexto;
     private ProgressBar barraDeProgreso;
     private  Musica musica;
@@ -65,6 +67,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
          musica = new Musica();
 
         Bundle bundle = getIntent().getExtras();
+        usados = bundle.getIntegerArrayList("usados");
         this.respuestaCorrecta= bundle.getString("correcta");
         categoria = bundle.getInt("idCategoria");
         cantidad= Integer.valueOf(bundle.getString("cantidad"));
@@ -170,7 +173,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
         }
         else{
             InterfazJuego interfazJuego = new InterfazJuego(this);
-            interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
+            interfazJuego.registrar(correctas,categoria);
             overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
             finish();
         }
@@ -178,7 +181,7 @@ public class PreguntaSeleccion  extends AppCompatActivity {
 
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
-        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria);
+        interfazJuego.seleccionarJuego(this.cantidad, this.correctas, this.categoria, this.usados);
     }
     private int establecer_progreso(long milisegundos){
         return (int) ((this.milisegundos-milisegundos)/1000);
