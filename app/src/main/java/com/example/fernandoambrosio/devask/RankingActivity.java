@@ -72,8 +72,8 @@ public class RankingActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, "En la Categoria de "+acceso.seleccionarNombreCategoria(idCategoria)+
-                        " de Guatemala he respondido "+String.valueOf(correctas)+" preguntas"+
-                        "\n para aprender más sobre Guatemala descarga JasApp");
+                        " de Guatemala he respondido "+String.valueOf(correctas)+"/10 preguntas correctas."+
+                        "\n Para aprender más sobre Guatemala descarga JasApp en Play Store.");
                 startActivity(Intent.createChooser(intent, "Share with"));
             }
         });

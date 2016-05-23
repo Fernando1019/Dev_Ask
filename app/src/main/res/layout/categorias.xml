@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText"
 
-            android:text="Cultura"
+            android:text="Tradiciones"
             android:textColor="#ffffff"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="98dp"
@@ -85,7 +85,7 @@
             android:enabled="true" />
 
         <EditText
-            android:layout_width="196dp"
+            android:layout_width="191dp"
             android:layout_height="wrap_content"
             android:id="@+id/editText3"
             android:text="Aleatorio"
