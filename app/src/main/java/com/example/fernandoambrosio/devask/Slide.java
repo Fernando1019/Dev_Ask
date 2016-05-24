@@ -25,10 +25,11 @@ public class Slide  extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-       if(conteo<4) {
+       if(conteo<1) {
          flipp.startFlipping();
          flipp.setFlipInterval(3000);
          conteo++;
+
        }
        else{
          Intent intent = new Intent(Slide.this, Menu.class);

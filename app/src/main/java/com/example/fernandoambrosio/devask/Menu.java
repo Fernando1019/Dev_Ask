@@ -40,6 +40,24 @@ public class Menu extends AppCompatActivity {
 
         });
 
+        Button boton_ayuda = (Button) findViewById(R.id.buttonAyuda);
+        boton_ayuda.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.buttonAyuda) {
+                    Intent intent = new Intent(Menu.this, Slide.class);
+                    overridePendingTransition(R.anim.zoom_entrada,  R.anim.zoom_salida);
+                    startActivity(intent);
+
+                }
+            }
+
+        });
+
+
+
+
         Button boton_jugar = (Button) findViewById(R.id.buttonJugar);
 
         boton_jugar.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +70,14 @@ public class Menu extends AppCompatActivity {
             }
 
         });
+
+
+
     }
+
+
+
+
     public  void jugar() {
         InterfazJuego interfazJuego = new InterfazJuego(this);
 

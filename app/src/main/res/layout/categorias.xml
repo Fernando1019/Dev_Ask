@@ -63,11 +63,13 @@
             android:enabled="true" />
 
         <ImageSwitcher
-            android:layout_width="215dp"
-            android:layout_height="200dp"
+            android:layout_width="197dp"
+            android:layout_height="172dp"
             android:id="@+id/imageSwitcher"
             android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="175dp" />
+            android:layout_marginRight="184dp"
+            android:background="@drawable/aleatoria"
+            android:layout_marginBottom="9dp" />
 
         <EditText
             android:layout_width="196dp"
