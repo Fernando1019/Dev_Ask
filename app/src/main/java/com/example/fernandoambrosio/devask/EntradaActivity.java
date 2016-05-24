@@ -1,5 +1,6 @@
 package com.example.fernandoambrosio.devask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 
 /**
@@ -29,14 +32,63 @@ public class EntradaActivity extends  AppCompatActivity {
 
         new Handler().postDelayed(new Runnable(){
             public void run(){
-                Intent intent = new Intent(EntradaActivity.this, Menu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.zoom_entrada,R.anim.zoom_salida);
-                finish();
+            if (leerArchivo()){
+                iniciarActivity();
+            }
+                else{
+                escribirArchivo();
+                iniciarSlide();
+            }
             };
         }, DURACION_SPLASH);
 
+
+    }
+    private boolean leerArchivo(){
+        try
+        {
+            BufferedReader fin =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    openFileInput("prueba_int.txt")));
+
+            String texto = fin.readLine();
+            fin.close();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+    private void escribirArchivo(){
+        try
+        {
+            OutputStreamWriter fout=
+                    new OutputStreamWriter(
+                            openFileOutput("prueba_int.txt", Context.MODE_PRIVATE));
+
+            fout.write("Texto de prueba.");
+            fout.close();
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+    private void iniciarActivity(){
+        Intent intent = new Intent(EntradaActivity.this, Menu.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.zoom_entrada,R.anim.zoom_salida);
+        finish();
+    }
+
+    private void iniciarSlide(){
+        Intent intent = new Intent(EntradaActivity.this, Slide.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.zoom_entrada,R.anim.zoom_salida);
+        finish();
     }
 
 }

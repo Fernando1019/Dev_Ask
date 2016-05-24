@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(contexto,Historial.class);
                 overridePendingTransition(R.anim.izquierda_entrada,  R.anim.izquierda_salida);
+                startActivity(intent);
                 finish();
             }
         });
