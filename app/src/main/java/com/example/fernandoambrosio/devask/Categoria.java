@@ -100,6 +100,7 @@ public class Categoria extends AppCompatActivity {
         imageSwitcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageSwitcher.setEnabled(false);
                 start();
                 new Handler().postDelayed(new Runnable(){
 
