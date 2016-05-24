@@ -153,7 +153,7 @@
         android:weightSum="1"
         android:baselineAligned="false"
         android:gravity="center_vertical|center"
-        android:background="@drawable/boton_presionado"
+        android:background="@drawable/boton_endocado"
         android:layout_gravity="center_horizontal">
 
         <TextView
