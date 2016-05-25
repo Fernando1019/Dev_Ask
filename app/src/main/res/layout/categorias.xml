@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#010101">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
 
         <ImageView
             android:layout_width="196dp"
-            android:layout_height="200dp"
+            android:layout_height="205dp"
             android:background="@drawable/geografia"
             android:id="@+id/imageView9"
             android:layout_gravity="bottom|right"
@@ -34,7 +35,7 @@
 
         <ImageView
             android:layout_width="194dp"
-            android:layout_height="200dp"
+            android:layout_height="205dp"
             android:background="@drawable/musica"
             android:id="@+id/imageView10"
             android:layout_gravity="right|bottom" />
@@ -63,13 +64,15 @@
             android:enabled="true" />
 
         <ImageSwitcher
-            android:layout_width="197dp"
+            android:layout_width="190dp"
             android:layout_height="172dp"
             android:id="@+id/imageSwitcher"
             android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="184dp"
+            android:layout_marginBottom="9dp"
             android:background="@drawable/aleatoria"
-            android:layout_marginBottom="9dp" />
+            android:layout_marginRight="198dp"
+            android:animateFirstView="false"
+            android:textAlignment="center" />
 
         <EditText
             android:layout_width="196dp"
