@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fernandoambrosio.devask">
+    package="com.jasapp.fernandoambrosio.devask">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".EntradaActivity"
+            android:name="com.jasapp.fernandoambrosio.devask.EntradaActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,28 +21,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.jasapp.fernandoambrosio.devask.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Menu"
+            android:name="com.jasapp.fernandoambrosio.devask.Menu"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PreguntaFv"
+            android:name="com.jasapp.fernandoambrosio.devask.PreguntaFv"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PreguntaSeleccion"
+            android:name="com.jasapp.fernandoambrosio.devask.PreguntaSeleccion"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RankingActivity"
+            android:name="com.jasapp.fernandoambrosio.devask.RankingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Slide"
+            android:name="com.jasapp.fernandoambrosio.devask.Slide"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Categoria"
+            android:name="com.jasapp.fernandoambrosio.devask.Categoria"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Historial"
+            android:name="com.jasapp.fernandoambrosio.devask.Historial"
             android:screenOrientation="portrait" />
     </application>
 
