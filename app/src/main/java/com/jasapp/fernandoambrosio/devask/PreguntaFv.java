@@ -84,7 +84,9 @@ public class PreguntaFv extends AppCompatActivity {
             }
 
             public void onFinish() {
-                musica.reproducirError(contexto);
+                if(!hasWindowFocus()) {
+                    musica.reproducirError(contexto);
+                }
                 mandarNuevoJuego();
             }
         }.start();
