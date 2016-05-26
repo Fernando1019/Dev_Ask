@@ -24,7 +24,7 @@ public class DataSource {
         while(logro.hasNext()){
             Logro elemento = logro.next();
             System.out.println(elemento.getJugador());
-            LOGROS.add(new Logro(elemento.getJugador(),elemento.getRespuestasCorrectas()));
+            LOGROS.add(new Logro(elemento.getJugador(),elemento.getRespuestasCorrectas(),elemento.getCategorias()));
         }
     }
 

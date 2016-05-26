@@ -59,6 +59,9 @@ public class Aleatorio {
             }
         }
     }
+    public int numeroSinRestricciones(){
+        return ran.nextInt(3);
+    }
     public int numero(int num){
         while(true){
             int n = ran.nextInt(num);

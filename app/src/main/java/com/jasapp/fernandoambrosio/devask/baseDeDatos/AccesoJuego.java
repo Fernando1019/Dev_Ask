@@ -194,15 +194,19 @@ public class AccesoJuego {
     public ArrayList<Logro> seleccionarLogros(){
         ArrayList<Logro> logroArrayList = new ArrayList<Logro>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String consulta = "SELECT nombre, respuestasCorrectas FROM jugador INNER JOIN \n" +
-                "(SELECT * FROM logro) as llogroObtenido ON llogroObtenido.jugador_idjugador = jugador.idjugador";
+        String consulta = "SELECT nombre, correctas as respuestasCorrectas, nombreCategoria  FROM jugador INNER JOIN\n" +
+                "(SELECT correctas, totalPregunta, nombre as nombreCategoria, jugador_idjugador FROM Categoria INNER JOIN\n" +
+                "(SELECT respuestasCorrectas as correctas, TotalPregunta as totalPregunta, categoria_idCategoria, jugador_idjugador FROM Logro ORDER BY(correctas) LIMIT 10) AS logros\n" +
+                "ON logros.categoria_idCategoria = Categoria.idCategoria) as logrosPorCategoria\n" +
+                "ON logrosPorCategoria.jugador_idjugador = jugador.idjugador";
         System.out.println(consulta);
          Cursor cursor = db.rawQuery(consulta,null);
         if(cursor != null && cursor.moveToFirst() && cursor.getCount() >= 1) {
             do {
                 String nombre=cursor.getString(cursor.getColumnIndex("nombre"));
                 int respuestasCorrectas=cursor.getInt(cursor.getColumnIndex("respuestasCorrectas"));
-                logroArrayList.add(new Logro(nombre,respuestasCorrectas));
+                String categoria= cursor.getString(cursor.getColumnIndex("nombreCategoria"));
+                logroArrayList.add(new Logro(nombre,respuestasCorrectas,categoria));
             } while (cursor.moveToNext());
             cursor.close();
         }

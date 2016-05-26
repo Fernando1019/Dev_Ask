@@ -6,11 +6,12 @@ package com.jasapp.fernandoambrosio.devask.tipos;
 public class Logro {
     private String jugador;
     private int respuestasCorrectas;
-    private int respuestasIncorrectas;
+    private String categorias;
 
-    public Logro(String jugador, int respuestasCorrectas) {
+    public Logro(String jugador, int respuestasCorrectas, String categoria) {
         this.jugador = jugador;
         this.respuestasCorrectas = respuestasCorrectas;
+        this.categorias=categoria;
     }
 
     public String getJugador() {
@@ -29,7 +30,15 @@ public class Logro {
         this.respuestasCorrectas = respuestasCorrectas;
     }
 
+    public String getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(String categorias) {
+        this.categorias = categorias;
+    }
+
     @Override
-    public String toString(){return jugador+","+"correctas: "+String.valueOf(respuestasCorrectas);
+    public String toString(){return categorias+","+ jugador+"correctas: "+String.valueOf(respuestasCorrectas);
     }
 }

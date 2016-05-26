@@ -52,7 +52,7 @@ public class LogroArrayAdapter<T> extends ArrayAdapter<T> {
 
         subCadenas = cadenaBruta.split(delimitador,2);
         jugador.setText("Nombre: "+item.getJugador());
-        logro.setText("Preguntas correctas: "+item.getRespuestasCorrectas());
+        logro.setText("Preguntas correctas: "+item.getRespuestasCorrectas()+" Categoria:"+item.getCategorias());
 
         //Devolver al ListView la fila creada
         return listItemView;

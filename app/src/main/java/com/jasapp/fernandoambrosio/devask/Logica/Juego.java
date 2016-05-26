@@ -31,8 +31,20 @@ public class Juego {
         int[] cantidadIds= acceso.cantidadDatosTabla("Directa",idCategoria);
         int numero = seleccionarId(cantidadIds,idsSeleccionados);
         PreguntaOpcionMultiple multiple = new PreguntaOpcionMultiple();
+        PreguntaOpcionMultiple nMultiple = new PreguntaOpcionMultiple();
+        int[] respuestas = correcta();
        multiple = acceso.getPreguntaTipo(cantidadIds[numero]);
         multiple.setId(cantidadIds[numero]);
+        nMultiple=multiple;
+        String [] aRespuestas =multiple.getRespuesta();
+        String[] nRespuestas =  new String[3];
+        int i=0;
+        nMultiple.setCorrecta(respuestas[i]);
+        for(int n:respuestas){
+            nRespuestas[n]=aRespuestas[i];
+            i++;
+        }
+        nMultiple.setRespuesta(nRespuestas);
         return multiple;
     }
 
@@ -76,5 +88,27 @@ public class Juego {
                 return numero;
             }
         }
+    }
+    private int[] correcta(){
+        int[] numeros = new int[3];
+        int i=0;
+        while(i<2){
+            boolean bandera = true;
+            int numero = aleatorio.numeroSinRestricciones();
+            System.out.println("aa");
+            System.out.println(numero);
+            System.out.println(i);
+            for(int n:numeros){
+                if( n== numero){
+                    bandera=false;
+                    break;
+                }
+            }
+            if(bandera){
+                numeros[i]=numero;
+                i++;
+            }
+        }
+        return numeros;
     }
 }
