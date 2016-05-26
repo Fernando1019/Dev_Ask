@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Regresar"
             android:id="@+id/buttonRegresaHistorial"
+            android:layout_marginLeft="110dp"
             android:textColor="#ffffff"
             style="@style/Widget.AppCompat.Button.Borderless"/>
     </android.support.v7.widget.Toolbar>
